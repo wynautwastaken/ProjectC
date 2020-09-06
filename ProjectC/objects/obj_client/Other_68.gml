@@ -2,7 +2,7 @@ show_debug_message("Client Packet");
 var n_id = ds_map_find_value(async_load, "id");
 
 var t = ds_map_find_value(async_load, "type");
-if (n_id == socket) {
+if (n_id != socket) {
 	
 } else {
 	if (t == network_type_data) {
