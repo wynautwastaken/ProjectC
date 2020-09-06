@@ -1,7 +1,6 @@
 function client_handle_setblock(buffer) {
 	// read data
 	var posx,posy,chunkx,chunky,type;
-	
 	type = buffer_read(buffer,buffer_u16);
 	chunkx = buffer_read(buffer,buffer_u64);
 	chunky = buffer_read(buffer,buffer_u8);
