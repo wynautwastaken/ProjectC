@@ -16,3 +16,5 @@ enum types {
 	dirt,
 	stone
 }
+#macro CLIENT_SIDE false
+#macro SERVER_SIDE true

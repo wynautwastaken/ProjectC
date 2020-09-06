@@ -1,3 +1,4 @@
+show_debug_message("Server got a Packet");
 var n_id = ds_map_find_value(async_load, "id");
 var t = ds_map_find_value(async_load, "type");
 
@@ -17,6 +18,8 @@ if (n_id == socket) {
 	if (t == network_type_data) {
 			
 		var t_buffer = ds_map_find_value(async_load, "buffer");
+		buffer_seek(t_buffer,buffer_seek_start,0);
+		var side = buffer_read(t_buffer, buffer_bool);
 		var cmd_type = buffer_read(t_buffer, buffer_u8);
 		//var inst = ds_map_find_value(socket_list, sock);
 			
