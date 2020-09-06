@@ -1,6 +1,17 @@
 {
   "resources": [
+    {"id":{"name":"spr_tile_dirt_grassy","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"order":1,},
+    {"id":{"name":"spr_tile_dirt","path":"sprites/spr_tile_dirt/spr_tile_dirt.yy",},"order":0,},
+    {"id":{"name":"obj_tile_1x1","path":"objects/obj_tile_1x1/obj_tile_1x1.yy",},"order":0,},
+    {"id":{"name":"spr_tile_mask","path":"sprites/spr_tile_mask/spr_tile_mask.yy",},"order":7,},
+    {"id":{"name":"spr_tile_stone","path":"sprites/spr_tile_stone/spr_tile_stone.yy",},"order":2,},
+    {"id":{"name":"spr_tile_dirt_transition_natural","path":"sprites/spr_tile_dirt_transition_natural/spr_tile_dirt_transition_natural.yy",},"order":6,},
     {"id":{"name":"obj_client","path":"objects/obj_client/obj_client.yy",},"order":1,},
+    {"id":{"name":"scr_common_funcs","path":"scripts/scr_common_funcs/scr_common_funcs.yy",},"order":3,},
+    {"id":{"name":"spr_tile_stone_transition_natural","path":"sprites/spr_tile_stone_transition_natural/spr_tile_stone_transition_natural.yy",},"order":3,},
+    {"id":{"name":"spr_tile_dirt_transition_harsh","path":"sprites/spr_tile_dirt_transition_harsh/spr_tile_dirt_transition_harsh.yy",},"order":5,},
+    {"id":{"name":"spr_tile_stone_transition_harsh","path":"sprites/spr_tile_stone_transition_harsh/spr_tile_stone_transition_harsh.yy",},"order":4,},
+    {"id":{"name":"obj_worldgen","path":"objects/obj_worldgen/obj_worldgen.yy",},"order":2,},
     {"id":{"name":"obj_server","path":"objects/obj_server/obj_server.yy",},"order":0,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
@@ -24,6 +35,8 @@
   "Folders": [
     {"folderPath":"folders/Rooms.yy","order":10,"resourceVersion":"1.0","name":"Rooms","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Engine.yy","order":11,"resourceVersion":"1.0","name":"Engine","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Placeables.yy","order":12,"resourceVersion":"1.0","name":"Placeables","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Sprites.yy","order":13,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},

@@ -1,0 +1,1 @@
+draw_sprite_part(sprite_index,image_index,(ind mod 4) * 8,(ind div 4) * 8,8,8,x,y);
