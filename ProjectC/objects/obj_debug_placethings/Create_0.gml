@@ -1,0 +1,1 @@
+tile = types.dirt;

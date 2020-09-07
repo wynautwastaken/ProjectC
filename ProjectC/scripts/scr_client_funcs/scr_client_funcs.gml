@@ -30,7 +30,9 @@ function client_handle_setblock(buffer) {
 	}
 	
 	// create the instance
-	instance_create_layer(pos.x,pos.y,layer,obj);
+	var inst = instance_create_layer(pos.x,pos.y,layer,obj);
+	inst.tile = type;
+	with(inst) event_user(0);
 	UpdateTilesNear(gridsnap(pos.x),gridsnap(pos.y));
 }
 

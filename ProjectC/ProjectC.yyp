@@ -5,6 +5,7 @@
     {"id":{"name":"obj_tile_1x1","path":"objects/obj_tile_1x1/obj_tile_1x1.yy",},"order":0,},
     {"id":{"name":"start","path":"rooms/start/start.yy",},"order":1,},
     {"id":{"name":"obj_selector","path":"objects/obj_selector/obj_selector.yy",},"order":14,},
+    {"id":{"name":"spr_tile_stone_overlay","path":"sprites/spr_tile_stone_overlay/spr_tile_stone_overlay.yy",},"order":8,},
     {"id":{"name":"scr_client_funcs","path":"scripts/scr_client_funcs/scr_client_funcs.yy",},"order":5,},
     {"id":{"name":"spr_tile_mask","path":"sprites/spr_tile_mask/spr_tile_mask.yy",},"order":7,},
     {"id":{"name":"src_world_funcs","path":"scripts/src_world_funcs/src_world_funcs.yy",},"order":5,},

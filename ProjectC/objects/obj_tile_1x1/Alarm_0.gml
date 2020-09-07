@@ -1,1 +1,1 @@
-UpdateTilesNear(x,y);
+event_user(0);
