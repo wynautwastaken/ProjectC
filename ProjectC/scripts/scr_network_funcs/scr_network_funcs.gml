@@ -18,3 +18,15 @@ function packet_set_block(side,chunkx,chunky,xx,yy,type) {
 	
 	return buffer;
 }
+
+// creates the ping packet
+function packet_ping(side) {
+	
+	var buffer = buffer_create(64,buffer_grow,1);
+	buffer_seek(buffer,buffer_seek_start,0);
+	
+	buffer_write(buffer,buffer_bool,side);
+	buffer_write(buffer,buffer_u8,packets.ping);
+	
+	return buffer;
+}

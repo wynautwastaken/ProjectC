@@ -18,7 +18,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"obj_worldgen","path":"objects/obj_worldgen/obj_worldgen.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"obj_debug_placethings","path":"objects/obj_debug_placethings/obj_debug_placethings.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -27,7 +27,7 @@
     "path": "folders/Engine.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_worldgen",
+  "name": "obj_debug_placethings",
   "tags": [],
   "resourceType": "GMObject",
 }

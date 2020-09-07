@@ -33,7 +33,22 @@ function server_handle_setblock(buffer) {
 	
 	// send it back
 	for (var i = 0; i < ds_list_size(socket_list); i++) {
-		network_send_packet(ds_list_find_value(socket_list,i),r_buffer,buffer_tell(buffer));
+		network_send_packet(ds_list_find_value(socket_list,i),r_buffer,buffer_tell(r_buffer));
 	}
 	buffer_delete(buffer);
+}
+
+function server_handle_ping(buffer) {
+		
+	buffer_seek(buffer,buffer_seek_start,0);
+	//check if from server
+	var side = buffer_read(buffer,buffer_bool); 
+	if(side == SERVER_SIDE) return;
+		
+	var r_buffer = packet_ping(SERVER_SIDE);
+	
+	// send it back
+	for (var i = 0; i < ds_list_size(socket_list); i++) {
+		network_send_packet(ds_list_find_value(socket_list,i),r_buffer,buffer_tell(r_buffer));
+	}
 }

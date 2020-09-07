@@ -33,3 +33,14 @@ function client_handle_setblock(buffer) {
 	instance_create_layer(pos.x,pos.y,layer,obj);
 	UpdateTilesNear(gridsnap(pos.x),gridsnap(pos.y));
 }
+
+function client_handle_ping(buffer) {
+	
+	buffer_seek(buffer,buffer_seek_start,0);
+	//check if from server
+	var side = buffer_read(buffer,buffer_bool); 
+	show_debug_message("client checking side, side is " + string(side));
+	if(side != SERVER_SIDE) return false;
+	ping = string(pingcounter);
+	pingcounter = 0;
+}

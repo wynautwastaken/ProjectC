@@ -7,3 +7,7 @@ if (server < 0) {
 	// connected!
 }
 show_debug_message("Client Connected");
+
+ping = "0";
+pingcounter = 0;
+alarm_set(0,30);

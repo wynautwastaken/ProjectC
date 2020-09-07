@@ -15,6 +15,9 @@ if (n_id != socket) {
 			case packets.set_block:
 				client_handle_setblock(t_buffer);
 				break;
+			case packets.ping:
+				client_handle_ping(t_buffer);
+				break;
 		}
 	}
 }

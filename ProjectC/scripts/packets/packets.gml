@@ -8,6 +8,10 @@ enum packets {
 	  * u8 - pos x (inside chunk)
 	  * u8 - pos y (inside chunk)
 	*/
+	ping,
+	/* buffer layout (after header):
+	  *literally nothing
+	  */
 }
 
 enum types {
