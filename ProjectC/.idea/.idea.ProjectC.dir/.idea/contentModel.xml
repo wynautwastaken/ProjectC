@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\dashi\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\dashi\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="C:\Users\dashi\Documents\GitHub\ProjectC\ProjectC" t="IncludeRecursive">
+      <e p="app.manifest" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Content" t="Include">
+        <e p="Content.mgcb" t="Include" />
+        <e p="obj" t="Include">
+          <e p="Windows" t="Include">
+            <e p="Content" t="Include">
+              <e p=".mgstats" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine" t="Include">
+        <e p="Objects" t="Include">
+          <e p="GameObject.cs" t="Include" />
+        </e>
+        <e p="View" t="Include">
+          <e p="Camera.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Icon.ico" t="Include" />
+      <e p="MainGame.cs" t="Include" />
+      <e p="Microsoft.Xna.Framework.Content.ContentTypeReader" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="ProjectC.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Objects" t="Include">
+        <e p="Player.cs" t="Include" />
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="ProjectC.csproj" t="IncludeRecursive" />
+      <e p="World" t="Include">
+        <e p="Chunk.cs" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>
