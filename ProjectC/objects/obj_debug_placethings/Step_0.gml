@@ -25,7 +25,20 @@ if(mouse_wheel_up()) {
 }
 if(mouse_wheel_down()) {
 	tile--;
-	if(tile == types.air) {
+	if(tile <= types.air) {
 		tile = types.stone;
 	}
+}
+
+if(keyboard_check(vk_left)) {
+	camera_set_view_pos(view_camera[0],camera_get_view_x(view_camera[0])-4,camera_get_view_y(view_camera[0]));
+}
+if(keyboard_check(vk_right)) {
+	camera_set_view_pos(view_camera[0],camera_get_view_x(view_camera[0])+4,camera_get_view_y(view_camera[0]));
+}
+if(keyboard_check(vk_up)) {
+	camera_set_view_pos(view_camera[0],camera_get_view_x(view_camera[0]),camera_get_view_y(view_camera[0])-4);
+}
+if(keyboard_check(vk_down)) {
+	camera_set_view_pos(view_camera[0],camera_get_view_x(view_camera[0]),camera_get_view_y(view_camera[0])+4);
 }

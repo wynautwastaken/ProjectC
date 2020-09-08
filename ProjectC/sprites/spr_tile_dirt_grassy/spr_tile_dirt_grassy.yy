@@ -1,20 +1,19 @@
 {
-  "name": "spr_tile_dirt_grassy",
-  "HTile": false,
-  "VTile": false,
-  "For3D": false,
+  "bboxMode": 0,
+  "collisionKind": 1,
+  "type": 0,
+  "origin": 0,
   "preMultiplyAlpha": false,
   "edgeFiltering": false,
   "collisionTolerance": 0,
+  "swfPrecision": 2.525,
   "bbox_left": 0,
   "bbox_right": 31,
   "bbox_top": 0,
   "bbox_bottom": 31,
-  "origin": 0,
-  "bboxMode": 0,
-  "collisionKind": 1,
-  "type": 0,
-  "swfPrecision": 2.525,
+  "HTile": false,
+  "VTile": false,
+  "For3D": false,
   "width": 32,
   "height": 32,
   "textureGroupId": {
@@ -27,15 +26,11 @@
   "frames": [
     {"compositeImage":{"FrameId":{"name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"LayerId":{"name":"98db9238-4dcc-4686-9a07-e1a92c1ff21d","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"LayerId":{"name":"6600b15a-11e2-4903-a963-6e545c85350c","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"LayerId":{"name":"5e3d94b9-6ba2-43bd-8ed7-a62ca9920fc1","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_tile_dirt_grassy","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"resourceVersion":"1.0","name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "tracks": [
-      {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"e2f053d3-6702-4cba-8a37-eef92697bc11","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-          ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
-    ],
-    "name": "spr_tile_dirt_grassy",
     "spriteId": {"name":"spr_tile_dirt_grassy","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},
     "timeUnits": 1,
     "playback": 1,
@@ -46,6 +41,11 @@
     "length": 1.0,
     "events": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MessageEventKeyframe>",},
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
+    "tracks": [
+      {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
+            {"id":"e2f053d3-6702-4cba-8a37-eef92697bc11","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"4f8b5afc-7a48-4c1c-8be4-00e513761d74","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+          ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
+    ],
     "visibleRange": null,
     "lockOrigin": false,
     "showBackdrop": true,
@@ -62,17 +62,19 @@
     "eventStubScript": null,
     "parent": {"name":"spr_tile_dirt_grassy","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},
     "resourceVersion": "1.3",
+    "name": "spr_tile_dirt_grassy",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"98db9238-4dcc-4686-9a07-e1a92c1ff21d","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default (2)","resourceVersion":"1.0","name":"5e3d94b9-6ba2-43bd-8ed7-a62ca9920fc1","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
     "name": "Sprites",
     "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
+  "name": "spr_tile_dirt_grassy",
   "tags": [],
   "resourceType": "GMSprite",
 }

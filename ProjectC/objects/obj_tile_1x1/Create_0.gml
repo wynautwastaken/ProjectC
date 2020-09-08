@@ -16,40 +16,76 @@ enum SIDES {
 	MIDH,
 	RIGHT
 }
+
 transition = false;
+
 GetTransition = function(sprite) {
+	switch(sprite) {
+		case spr_tile_dirt:
+			return spr_tile_dirt_transition_natural;
+	}
 	return spr_tile_stone_transition_natural;	
 }
 
+GetOverlay = function(sprite) {
+	switch(sprite) {
+		case spr_tile_dirt:
+			return spr_tile_dirt_overlay;
+	}
+	return spr_tile_stone_overlay;	
+}
 
 UpdateTileTrans = function() {
+	switch(tile) {
+		case types.dirt:
+			trans_priority = 1;
+			break;
+		case types.grass_dirt:
+			trans_priority = 1;
+			break;
+		case types.stone:
+			trans_priority = 0;
+			break;
+	}
 	var n_ind = SIDES.NONE, left = false, right = false, up = false, down = false;
 	if(place_meeting(x-8,y,obj_tile_1x1)) {
 		var inst = instance_place(x-8,y,obj_tile_1x1);
 		if(inst.sprite_index != sprite_index) {
-			other_sprite = inst.sprite_index;
-			left = true;
+			if(inst.trans_priority > trans_priority || (inst.tile == types.grass_dirt && tile == types.dirt)) {
+				transition = true;
+				left = true;
+				other_sprite = inst.sprite_index;
+			}
 		}
 	}
 	if(place_meeting(x+8,y,obj_tile_1x1)) {
 		var inst = instance_place(x+8,y,obj_tile_1x1);
 		if(inst.sprite_index != sprite_index) {
-			other_sprite = inst.sprite_index;
-			right = true;
+			if(inst.trans_priority > trans_priority || (inst.tile == types.grass_dirt && tile == types.dirt)) {
+				transition = true;
+				right = true;
+				other_sprite = inst.sprite_index;
+			}
 		}
 	}
 	if(place_meeting(x,y-8,obj_tile_1x1)) {
 		var inst = instance_place(x,y-8,obj_tile_1x1);
 		if(inst.sprite_index != sprite_index) {
-			other_sprite = inst.sprite_index;
-			up = true;
+			if(inst.trans_priority > trans_priority) {
+				transition = true;
+				up = true;
+				other_sprite = inst.sprite_index == spr_tile_dirt_grassy? spr_tile_dirt : inst.sprite_index;
+			}
 		}
 	}
 	if(place_meeting(x,y+8,obj_tile_1x1)) {
 		var inst = instance_place(x,y+8,obj_tile_1x1);
 		if(inst.sprite_index != sprite_index) {
-			other_sprite = inst.sprite_index;
-			down = true;
+			if(inst.trans_priority > trans_priority) {
+				transition = true;
+				down = true;
+				other_sprite = inst.sprite_index == spr_tile_dirt_grassy? spr_tile_dirt : inst.sprite_index;
+			}
 		}
 	}
 	
@@ -107,7 +143,6 @@ UpdateTileTrans = function() {
 	
 	return n_ind;
 }
-
 
 UpdateTile = function() {
 	switch(tile) {
@@ -198,4 +233,4 @@ other_sprite = spr_tile_dirt;
 
 tile = types.grass_dirt;
 
-alarm_set(0,2);
+trans_priority = 0;

@@ -6,7 +6,7 @@
     "path": "folders/Engine.yy",
   },
   "resourceVersion": "1.0",
-  "name": "src_world_funcs",
+  "name": "scr_world_funcs",
   "tags": [],
   "resourceType": "GMScript",
 }
