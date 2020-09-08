@@ -3,7 +3,6 @@ function server_handle_setblock(buffer) {
 	buffer_seek(buffer,buffer_seek_start,0);
 	//check if from client
 	var side = buffer_read(buffer,buffer_bool); 
-	show_debug_message("server checking side, side is " + string(side));
 	if(side != CLIENT_SIDE) return false;
 	//discard header
 	buffer_read(buffer,buffer_u8); 
@@ -17,17 +16,7 @@ function server_handle_setblock(buffer) {
 	posx = buffer_read(buffer,buffer_u8);
 	posy = buffer_read(buffer,buffer_u8);
 	
-	// check if chunk exists
-	var grid;
-	var chunkid = string(chunkx)+"-"+string(chunky);
-	if (ds_map_exists(world,chunkid)) {
-		grid = ds_map_find_value(world,chunkid);
-	} else {
-		grid = ds_grid_create(256,256);
-		ds_map_set(world,chunkid,grid);
-	}
-	
-	ds_grid_set(grid,posx,posy,type);
+	SetTile(chunkx, chunky,posx,posy,type);
 	
 	var r_buffer = packet_set_block(SERVER_SIDE,chunkx,chunky,posx,posy,type);
 	

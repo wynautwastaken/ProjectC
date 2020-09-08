@@ -3,7 +3,6 @@ function client_handle_setblock(buffer) {
 	buffer_seek(buffer,buffer_seek_start,0);
 	//check if from server
 	var side = buffer_read(buffer,buffer_bool); 
-	show_debug_message("client checking side, side is " + string(side));
 	if(side != SERVER_SIDE) return false;
 	//discard header
 	buffer_read(buffer,buffer_u8); 
@@ -17,23 +16,16 @@ function client_handle_setblock(buffer) {
 	posx = buffer_read(buffer,buffer_u8)*8;
 	posy = buffer_read(buffer,buffer_u8)*8;
 	
-	var pos = CalcWorld(chunkx,chunky,posx,posy);
-	var obj;
 	switch (type) {
-		default: obj = obj_tile_1x1; break;
+		default:
+			break;
 		
 		case types.air:
-			instance_destroy(instance_position(gridsnap(pos.x),gridsnap(pos.y),obj_tile_1x1));
-			UpdateTilesNear(gridsnap(pos.x),gridsnap(pos.y));
+			RemoveTile(chunkx,chunky,posx,posy);
 			return false;
 			break;
 	}
-	
-	// create the instance
-	var inst = instance_create_layer(pos.x,pos.y,layer,obj);
-	inst.tile = type;
-	with(inst) event_user(0);
-	UpdateTilesNear(gridsnap(pos.x),gridsnap(pos.y));
+	SetTile(chunkx,chunky,posx,posy,type);
 }
 
 function client_handle_ping(buffer) {
@@ -41,7 +33,6 @@ function client_handle_ping(buffer) {
 	buffer_seek(buffer,buffer_seek_start,0);
 	//check if from server
 	var side = buffer_read(buffer,buffer_bool); 
-	show_debug_message("client checking side, side is " + string(side));
 	if(side != SERVER_SIDE) return false;
 	ping = string(pingcounter);
 	pingcounter = 0;
