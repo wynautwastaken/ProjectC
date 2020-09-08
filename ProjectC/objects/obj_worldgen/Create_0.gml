@@ -1,3 +1,8 @@
+
+global.world = ds_map_create(); // map of chunks (grids)
+global.loadedtiles = ds_list_create(); //list of tiles (structs)
+global.screentiles = ds_list_create(); //list of tiles (structs)
+
 global.seed = round(power(pi,40));
 
 GenNoise = function(xx,range) {
@@ -44,28 +49,14 @@ GenWorldPart = function() {
 	i++;
 	var n = GenNoise(i/4,96);
 	for(var j = 0; j < n; j++) {
-		var ipos = {x: i*8, y: (96-j)*8};
-		var inst = instance_create_layer(gridsnap(ipos.x),gridsnap(ipos.y),layer,obj_tile_1x1);
-		inst.tile = types.stone;
-		with(inst) event_user(0);
-		UpdateTilesNear(gridsnap(ipos.x),gridsnap(ipos.y));
 			
 		var pos = CalcChunk(i*8,(96-j)*8);
 		var posx = pos.x;
 		var posy = pos.y;
 		var chunkx = pos.chunk_x;
 		var chunky = pos.chunk_y;
-			
-		var grid;
-		var chunkid = string(chunkx)+"-"+string(chunky);
-		if (ds_map_exists(obj_server.world,chunkid)) {
-			grid = ds_map_find_value(obj_server.world,chunkid);
-		} else {
-			grid = ds_grid_create(256,256);
-			ds_map_set(obj_server.world,chunkid,grid);
-		}
-	
-		ds_grid_set(grid,posx,posy,types.stone);
+		
+		SetTile(chunkx,chunky,posx,posy,types.stone);
 	}
 }
 

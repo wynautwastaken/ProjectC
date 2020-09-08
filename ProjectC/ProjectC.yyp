@@ -2,7 +2,6 @@
   "resources": [
     {"id":{"name":"spr_tile_dirt_grassy","path":"sprites/spr_tile_dirt_grassy/spr_tile_dirt_grassy.yy",},"order":1,},
     {"id":{"name":"spr_tile_dirt","path":"sprites/spr_tile_dirt/spr_tile_dirt.yy",},"order":0,},
-    {"id":{"name":"obj_tile_1x1","path":"objects/obj_tile_1x1/obj_tile_1x1.yy",},"order":0,},
     {"id":{"name":"start","path":"rooms/start/start.yy",},"order":1,},
     {"id":{"name":"obj_selector","path":"objects/obj_selector/obj_selector.yy",},"order":14,},
     {"id":{"name":"spr_tile_stone_overlay","path":"sprites/spr_tile_stone_overlay/spr_tile_stone_overlay.yy",},"order":8,},
@@ -21,6 +20,7 @@
     {"id":{"name":"spr_tile_stone_transition_natural","path":"sprites/spr_tile_stone_transition_natural/spr_tile_stone_transition_natural.yy",},"order":3,},
     {"id":{"name":"spr_tile_dirt_transition_harsh","path":"sprites/spr_tile_dirt_transition_harsh/spr_tile_dirt_transition_harsh.yy",},"order":5,},
     {"id":{"name":"spr_tile_stone_transition_harsh","path":"sprites/spr_tile_stone_transition_harsh/spr_tile_stone_transition_harsh.yy",},"order":4,},
+    {"id":{"name":"obj_render","path":"objects/obj_render/obj_render.yy",},"order":7,},
     {"id":{"name":"obj_debug_placethings","path":"objects/obj_debug_placethings/obj_debug_placethings.yy",},"order":2,},
     {"id":{"name":"obj_server","path":"objects/obj_server/obj_server.yy",},"order":1,},
     {"id":{"name":"packets","path":"scripts/packets/packets.yy",},"order":2,},
