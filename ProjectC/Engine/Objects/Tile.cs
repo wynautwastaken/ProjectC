@@ -167,7 +167,7 @@ namespace ProjectC.Engine.Objects
             pos.Add("x", _position.X);
             pos.Add("y",_position.Y);
             json.Add("position", pos);
-            json.Add("tiletype", 2);
+            json.Add("tiletype", (int)TileType);
             return json;
         }
 
