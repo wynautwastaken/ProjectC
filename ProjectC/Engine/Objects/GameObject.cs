@@ -28,9 +28,9 @@ namespace ProjectC.Engine.Objects
         {
             if (sprite != null)
             {
-                Vector2 newOrgin = origin;
+                Vector2 newOrigin = origin;
 
-                _spriteBatch.Draw(sprite, new Vector2(position.X + -newOrgin.X, position.Y + -newOrgin.Y), Color.White);
+                _spriteBatch.Draw(sprite, position - newOrigin, Color.White);
             }
         }
 

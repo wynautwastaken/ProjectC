@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\dashi\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\dashi\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
-    <e p="C:\Users\dashi\Documents\GitHub\ProjectC\ProjectC" t="IncludeRecursive">
+    <e p="C:\Users\Cal\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Cal\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC" t="IncludeRecursive">
       <e p="app.manifest" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Content" t="Include">
         <e p="bin" t="Include">
+          <e p="dirt_grassy.xnb" t="Include" />
           <e p="square.xnb" t="Include" />
           <e p="Windows" t="Include">
             <e p="Content" t="Include">
+              <e p="dirt_grassy.xnb" t="Include" />
               <e p="square.xnb" t="Include" />
             </e>
           </e>
         </e>
         <e p="Content.mgcb" t="Include" />
+        <e p="dirt_grassy.png" t="Include" />
+        <e p="fresh_tile.png" t="Include" />
         <e p="obj" t="Include">
           <e p=".mgcontent" t="Include" />
           <e p=".mgstats" t="Include" />
+          <e p="dirt_grassy.mgcontent" t="Include" />
           <e p="square.mgcontent" t="Include" />
           <e p="Windows" t="Include">
             <e p="Content" t="Include">
               <e p=".mgcontent" t="Include" />
               <e p=".mgstats" t="Include" />
+              <e p="dirt_grassy.mgcontent" t="Include" />
               <e p="square.mgcontent" t="Include" />
             </e>
           </e>
         </e>
+        <e p="stone.png" t="Include" />
         <e p="Untitled - 1.png" t="Include" />
       </e>
       <e p="Engine" t="Include">
         <e p="Objects" t="Include">
+          <e p="Entities" t="Include" />
+          <e p="EnumSides.cs" t="Include" />
+          <e p="EnumTiles.cs" t="Include" />
           <e p="GameObject.cs" t="Include" />
+          <e p="Tile.cs" t="Include" />
         </e>
         <e p="View" t="Include">
           <e p="Camera.cs" t="Include" />
           <e p="Sprites.cs" t="Include" />
+        </e>
+        <e p="World" t="Include">
+          <e p="Chunk.cs" t="Include" />
+          <e p="ChunkedWorld.cs" t="Include" />
         </e>
       </e>
       <e p="Icon.ico" t="Include" />

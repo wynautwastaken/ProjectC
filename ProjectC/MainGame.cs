@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectC.Engine.View;
+using ProjectC.Engine.World;
 using ProjectC.Objects;
 
 namespace ProjectC
@@ -34,6 +35,7 @@ namespace ProjectC
 
             // TODO: use this.Content to load your game content here
             Sprites.Square = this.Content.Load<Texture2D>("square");
+            Sprites.TileDirtGrass = this.Content.Load<Texture2D>("dirt_grassy");
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,8 +57,11 @@ namespace ProjectC
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // draw logic
-            // todo implement camera
             Camera.startBatch(_spriteBatch);
+            foreach(Chunk chunk in ChunkedWorld.ChunksLoaded)
+            {
+                chunk.Render(_spriteBatch);
+            }
             foreach (GameObject gameObject in GameObject.Objects)
             {
                 Camera.draw(_spriteBatch,gameObject);
