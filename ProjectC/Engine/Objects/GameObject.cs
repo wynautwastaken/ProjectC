@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Json;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectC.Engine.View;
+using ProjectC.World;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace ProjectC.Engine.Objects
 {
-    public abstract class GameObject
+    public abstract class GameObject : IChunkStorable
     {
         public Texture2D sprite;
         public Vector2 origin = new Vector2(0,0); // from bottom left so y should be negitive
@@ -37,6 +39,16 @@ namespace ProjectC.Engine.Objects
         public virtual void destroy()
         {
             Objects.Remove(this);
+        }
+
+        public JsonObject Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Load(string data)
+        {
+            throw new NotImplementedException();
         }
     }
 }

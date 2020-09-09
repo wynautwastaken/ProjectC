@@ -34,19 +34,24 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/World/Chunk.cs" />
         <option value="$PROJECT_DIR$/Engine/View/Camera.cs" />
-        <option value="$PROJECT_DIR$/Engine/View/Sprites.cs" />
-        <option value="$PROJECT_DIR$/Engine/Objects/GameObject.cs" />
         <option value="$PROJECT_DIR$/Engine/Objects/EnumSides.cs" />
         <option value="$PROJECT_DIR$/Engine/Objects/EnumTiles.cs" />
         <option value="$PROJECT_DIR$/Engine/Objects/Chunk.cs" />
         <option value="$PROJECT_DIR$/Engine/ChunkedWorld.cs" />
-        <option value="$PROJECT_DIR$/MainGame.cs" />
         <option value="$PROJECT_DIR$/Engine/World/ChunkedWorld.cs" />
         <option value="$PROJECT_DIR$/Engine/World/Chunk.cs" />
-        <option value="$PROJECT_DIR$/Engine/Objects/Tile.cs" />
+        <option value="$PROJECT_DIR$/MainGame.cs" />
+        <option value="$PROJECT_DIR$/Engine/View/Sprites.cs" />
+        <option value="$PROJECT_DIR$/Engine/Objects/IChunkStorable.cs" />
+        <option value="$PROJECT_DIR$/Engine/Objects/GameObject.cs" />
+        <option value="$PROJECT_DIR$/World/IChunkStorable.cs" />
+        <option value="$PROJECT_DIR$/Engine/EnumSides.cs" />
+        <option value="$PROJECT_DIR$/Engine/EnumTiles.cs" />
         <option value="$PROJECT_DIR$/Objects/Player.cs" />
+        <option value="$PROJECT_DIR$/World/ChunkedWorld.cs" />
+        <option value="$PROJECT_DIR$/Engine/Objects/Tile.cs" />
+        <option value="$PROJECT_DIR$/World/Chunk.cs" />
       </list>
     </option>
   </component>
@@ -65,6 +70,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="ReSpellerSettingsId" />
   </component>
   <component name="RunManager">
     <configuration name="ProjectC" type="DotNetProject" factoryName=".NET Project">
@@ -95,6 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599607713043</updated>
       <workItem from="1599607723000" duration="4050000" />
+      <workItem from="1599688184422" duration="3385000" />
     </task>
     <servers />
   </component>
@@ -119,30 +126,38 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1876" height="164" key="GridCell.Tab.0.bottom" timestamp="1599676481910">
+    <state width="1876" height="164" key="GridCell.Tab.0.bottom" timestamp="1599691565874">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1876" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1599676481910" />
+    <state width="1876" height="164" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1599691565874" />
     <state width="2517" height="303" key="GridCell.Tab.0.bottom/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
-    <state width="1876" height="164" key="GridCell.Tab.0.center" timestamp="1599676481910">
+    <state width="1876" height="164" key="GridCell.Tab.0.center" timestamp="1599691565874">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1876" height="164" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1599676481910" />
+    <state width="1876" height="164" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1599691565874" />
     <state width="2517" height="303" key="GridCell.Tab.0.center/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
-    <state width="1876" height="164" key="GridCell.Tab.0.left" timestamp="1599676481909">
+    <state width="1876" height="164" key="GridCell.Tab.0.left" timestamp="1599691565873">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1876" height="164" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1599676481909" />
+    <state width="1876" height="164" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1599691565873" />
     <state width="2517" height="303" key="GridCell.Tab.0.left/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
-    <state width="1876" height="164" key="GridCell.Tab.0.right" timestamp="1599676481910">
+    <state width="1876" height="164" key="GridCell.Tab.0.right" timestamp="1599691565874">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1876" height="164" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1599676481910" />
+    <state width="1876" height="164" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1599691565874" />
     <state width="2517" height="303" key="GridCell.Tab.0.right/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
-    <state x="638" y="179" width="644" height="801" key="find.popup" timestamp="1599673651122">
+    <state x="794" y="282" key="RiderGenerateDialog" timestamp="1599678885107">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="638" y="179" width="644" height="801" key="find.popup/0.0.1920.1160@0.0.1920.1160" timestamp="1599673651122" />
+    <state x="794" y="282" key="RiderGenerateDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1599678885107" />
+    <state x="461" y="212" key="SettingsEditor" timestamp="1599683648873">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="461" y="212" key="SettingsEditor/0.0.1920.1160@0.0.1920.1160" timestamp="1599683648873" />
+    <state x="638" y="179" width="644" height="801" key="find.popup" timestamp="1599691590672">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="638" y="179" width="644" height="801" key="find.popup/0.0.1920.1160@0.0.1920.1160" timestamp="1599691590672" />
     <state x="616" y="266" key="run.anything.popup" timestamp="1599674377633">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>

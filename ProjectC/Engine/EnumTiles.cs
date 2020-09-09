@@ -1,4 +1,4 @@
-﻿namespace ProjectC.Engine.Objects
+﻿namespace ProjectC.Engine
 {
     public enum EnumTiles
     {
