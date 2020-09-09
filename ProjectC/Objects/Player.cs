@@ -1,6 +1,8 @@
-﻿using Colorless.Engine.Objects;
+﻿using System;
+using System.Diagnostics;
+using ProjectC.Engine.Objects;
 
-namespace Colorless.World
+namespace ProjectC.Objects
 {
     public class Player : GameObject
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Colorless.Engine.Objects
+namespace ProjectC.Engine.Objects
 {
     public abstract class GameObject
     {
@@ -10,8 +10,11 @@ namespace Colorless.Engine.Objects
         {
             Objects.Add(this);
         }
-        
-        public virtual void step() {}
+
+        public virtual void step()
+        {
+            
+        }
         
         public virtual void draw() {}
 

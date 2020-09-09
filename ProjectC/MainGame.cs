@@ -1,7 +1,9 @@
-﻿using Colorless.Engine.Objects;
+﻿using ProjectC.Engine.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ProjectC.Objects;
+
 namespace ProjectC
 {
     public class MainGame : Game
@@ -19,7 +21,9 @@ namespace ProjectC
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            
+            new Player();
+            
             base.Initialize();
         }
 

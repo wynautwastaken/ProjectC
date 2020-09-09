@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using Colorless.Engine.Objects;
+using ProjectC.Engine.Objects;
 using Microsoft.Xna.Framework;
 
-namespace Colorless.World
+namespace ProjectC.World
 {
     public class Chunk
     {
@@ -22,6 +21,7 @@ namespace Colorless.World
 
         /**
          * Loads a chunk from existing data
+         * Not implemented
          */
         public Chunk(String data)
         {
@@ -31,15 +31,31 @@ namespace Colorless.World
         /**
          * Adds an object to the chunk
          */
-        public void AddObject(Vector2 chunkPos, GameObject gameObject)
+        public void SetPos(Vector2 chunkPos, GameObject gameObject, bool replace)
         {
-            Objects.Add(chunkPos.X+"-"+chunkPos.Y,gameObject);
+            string str = chunkPos.X + "-" + chunkPos.Y;
+            if (Objects.ContainsKey(str) && replace)
+            {
+                Objects.Remove(str);
+            }
+            Objects.Add(chunkPos.X + "-" + chunkPos.Y, gameObject);
+        }
+
+        public GameObject FindObject(Vector2 position)
+        {
+            string str = position.X + "-" + position.Y, gameObject;
+            if (Objects.ContainsKey(str))
+            {
+                return Objects[str];
+            }
+
+            return null;
         }
         
         /**
          * Saves the chunk but does not unload it
          */
-        public void Save()
+        public void Save() // TODO unfinished
         {
             // find chunk file
             String path = "C:\\Users\\dashi\\Desktop\\save\\" + Position.X + "-" + Position.Y + ".json";
@@ -47,9 +63,9 @@ namespace Colorless.World
             {
                 File.Delete(path);
             }
-
-            FileStream stream = File.Create(path);
             
+            FileStream stream = File.Create(path);
+            // write to stream
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Colorless.Engine.View
+﻿namespace ProjectC.Engine.View
 {
     public class Camera
     {
