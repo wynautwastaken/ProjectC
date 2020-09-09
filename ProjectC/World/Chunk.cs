@@ -43,7 +43,7 @@ namespace ProjectC.World
 
         public GameObject FindObject(Vector2 position)
         {
-            string str = position.X + "-" + position.Y, gameObject;
+            string str = position.X + "-" + position.Y;
             if (Objects.ContainsKey(str))
             {
                 return Objects[str];

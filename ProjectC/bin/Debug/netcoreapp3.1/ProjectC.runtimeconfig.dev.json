@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\dashi\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\dashi\\.nuget\\packages"
-    ]
-  }
-}
