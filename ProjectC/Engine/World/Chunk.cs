@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectC.Engine.Objects;
-using ProjectC.Engine.View;
-using ProjectC.Engine.World;
-using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace ProjectC.Engine.World

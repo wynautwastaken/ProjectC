@@ -1,4 +1,6 @@
-﻿using ProjectC.Engine.Objects;
+﻿using System.Net;
+using System.Threading;
+using ProjectC.Engine.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -23,8 +25,10 @@ namespace ProjectC
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
-            new Player();
+
+            new Server.Server(IPAddress.Any, 7777);
+            Thread.Sleep(1000);
+            new Client.Client("127.0.0.1", 7777);
             
             base.Initialize();
         }

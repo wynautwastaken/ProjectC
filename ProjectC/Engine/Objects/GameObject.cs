@@ -10,7 +10,7 @@ namespace ProjectC.Engine.Objects
     public abstract class GameObject
     {
         public Texture2D sprite;
-        public Vector2 origin = new Vector2(0,0); // from top right so y should be negitive
+        public Vector2 origin = new Vector2(0,0); // from bottom left so y should be negitive
         public Vector2 position = new Vector2(0,0);
         public static List<GameObject> Objects = new List<GameObject>();
 
