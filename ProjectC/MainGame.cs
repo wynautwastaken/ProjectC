@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectC.Engine.View;
-using ProjectC.Engine.World;
 using ProjectC.Objects;
+using ProjectC.World;
 
 namespace ProjectC
 {
@@ -36,6 +36,9 @@ namespace ProjectC
             // TODO: use this.Content to load your game content here
             Sprites.Square = this.Content.Load<Texture2D>("square");
             Sprites.TileDirtGrass = this.Content.Load<Texture2D>("dirt_grassy");
+            Sprites.TileStone = this.Content.Load<Texture2D>("stone");
+            Sprites.TileFresh = this.Content.Load<Texture2D>("fresh_tile");
+            Sprites.PlayerHuman = this.Content.Load<Texture2D>("player_hmn");
         }
 
         protected override void Update(GameTime gameTime)

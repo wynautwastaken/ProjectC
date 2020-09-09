@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Json;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProjectC.Engine.World;
 using ProjectC.Engine.View;
-using ProjectC.Engine.World;
+using ProjectC.World;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace ProjectC.Engine.Objects
 {
-    public class Tile
+    public class Tile : IChunkStorable
     {
         private Texture2D _sheet;
         private EnumSides _side = EnumSides.None;
@@ -26,9 +26,9 @@ namespace ProjectC.Engine.Objects
             _sheet = type switch
             {
                 EnumTiles.Dirt => Sprites.TileDirtGrass,
-                EnumTiles.Fresh => Sprites.TileDirtGrass,
+                EnumTiles.Fresh => Sprites.TileFresh,
                 EnumTiles.Grass => Sprites.TileDirtGrass,
-                EnumTiles.Stone => Sprites.TileDirtGrass,
+                EnumTiles.Stone => Sprites.TileStone,
                 EnumTiles.Air => null,
                 _ => _sheet
             };
@@ -157,6 +157,23 @@ namespace ProjectC.Engine.Objects
         public static Vector2 SnapToGrid(Vector2 toSnap)
         {
             return Vector2.Floor(toSnap / 8) * 8;
+        }
+
+        public JsonObject Save()
+        {
+            var json = new JsonObject();
+            json.Add("type", "tile");
+            var pos = new JsonObject();
+            pos.Add("x", _position.X);
+            pos.Add("y",_position.Y);
+            json.Add("position", pos);
+            json.Add("tiletype", 2);
+            return json;
+        }
+
+        public bool Load(string data)
+        {
+            throw new NotImplementedException();
         }
     }
 }

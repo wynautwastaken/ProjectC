@@ -6,9 +6,10 @@ using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ProjectC.Engine;
 using ProjectC.Engine.Objects;
 using ProjectC.Engine.View;
-using ProjectC.Engine.World;
+using ProjectC.World;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
@@ -18,14 +19,14 @@ namespace ProjectC.Objects
     {
         public Player()
         {
-            origin = new Vector2(8,8);
+            origin = new Vector2(12,24);
         }
         
         private int _oldScroll = 0;
         
         public override void step()
         {
-            sprite = Sprites.Square;
+            sprite = Sprites.PlayerHuman;
             
             var w = Keyboard.GetState().IsKeyDown(Keys.W) ? 1 : 0;
             var a = Keyboard.GetState().IsKeyDown(Keys.A) ? 1 : 0;
@@ -55,7 +56,13 @@ namespace ProjectC.Objects
                 clampedpos *= len;
                 new Tile(EnumTiles.Fresh, ChunkedWorld.LoadChunk(new ChunkIdentifier((int)((pos.X / 8) / 256), (int)((pos.Y / 8) / 256))), Tile.SnapToGrid(position + clampedpos));
             }
-            
+
+            var save = Keyboard.GetState().IsKeyDown(Keys.K);
+            if (save)
+            {
+                ChunkedWorld.Save();
+            }
+                            
             Camera.zoom = Math.Clamp(Camera.zoom, 0.5f, 4f);
         }
     }
