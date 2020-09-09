@@ -31,7 +31,7 @@ namespace ProjectC.World
         /**
          * Adds an object to the chunk
          */
-        public void SetPos(Vector2 chunkPos, GameObject gameObject, bool replace)
+        public void Add(Vector2 chunkPos, GameObject gameObject, bool replace)
         {
             string str = chunkPos.X + "-" + chunkPos.Y;
             if (Objects.ContainsKey(str) && replace)
@@ -58,7 +58,7 @@ namespace ProjectC.World
         public void Save() // TODO unfinished
         {
             // find chunk file
-            String path = "C:\\Users\\dashi\\Desktop\\save\\" + Position.X + "-" + Position.Y + ".json";
+            String path = Position.X + "-" + Position.Y + ".json"; // todo fix
             if (File.Exists(path))
             {
                 File.Delete(path);

@@ -34,11 +34,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Engine/View/Camera.cs" />
         <option value="$PROJECT_DIR$/World/Chunk.cs" />
-        <option value="$PROJECT_DIR$/Objects/Player.cs" />
+        <option value="$PROJECT_DIR$/Engine/View/Sprites.cs" />
         <option value="$PROJECT_DIR$/MainGame.cs" />
+        <option value="$PROJECT_DIR$/Objects/Player.cs" />
         <option value="$PROJECT_DIR$/Engine/Objects/GameObject.cs" />
+        <option value="$PROJECT_DIR$/Engine/View/Camera.cs" />
       </list>
     </option>
   </component>
@@ -110,21 +111,25 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2517" height="397" key="GridCell.Tab.0.bottom" timestamp="1599609512305">
+    <state width="2517" height="303" key="GridCell.Tab.0.bottom" timestamp="1599623478699">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="397" key="GridCell.Tab.0.bottom/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599609512305" />
-    <state width="2517" height="397" key="GridCell.Tab.0.center" timestamp="1599609512305">
+    <state width="2517" height="303" key="GridCell.Tab.0.bottom/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
+    <state width="2517" height="303" key="GridCell.Tab.0.center" timestamp="1599623478699">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="397" key="GridCell.Tab.0.center/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599609512305" />
-    <state width="2517" height="397" key="GridCell.Tab.0.left" timestamp="1599609512305">
+    <state width="2517" height="303" key="GridCell.Tab.0.center/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
+    <state width="2517" height="303" key="GridCell.Tab.0.left" timestamp="1599623478699">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="397" key="GridCell.Tab.0.left/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599609512305" />
-    <state width="2517" height="397" key="GridCell.Tab.0.right" timestamp="1599609512305">
+    <state width="2517" height="303" key="GridCell.Tab.0.left/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
+    <state width="2517" height="303" key="GridCell.Tab.0.right" timestamp="1599623478699">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="397" key="GridCell.Tab.0.right/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599609512305" />
+    <state width="2517" height="303" key="GridCell.Tab.0.right/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599623478699" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1599620708033">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599620708033" />
   </component>
 </project>
