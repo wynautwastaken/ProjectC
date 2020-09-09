@@ -33,14 +33,18 @@ namespace ProjectC.World
 
         public static void Load()
         {
-            var filejson = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/save.json");
-            var json = JsonValue.Parse(filejson);
-            if (((JsonObject) json).TryGetValue("world", out var chunkarr))
+            if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/save.json"))
             {
-                foreach (var obj in (JsonArray) chunkarr)
+                var filejson = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                                                "/save.json");
+                var json = JsonValue.Parse(filejson);
+                if (((JsonObject) json).TryGetValue("world", out var chunkarr))
                 {
-                    var chunk = new Chunk((JsonObject) obj);
-                    LoadChunk(chunk.ChunkId, chunk);
+                    foreach (var obj in (JsonArray) chunkarr)
+                    {
+                        var chunk = new Chunk((JsonObject) obj);
+                        LoadChunk(chunk.ChunkId, chunk);
+                    }
                 }
             }
         }

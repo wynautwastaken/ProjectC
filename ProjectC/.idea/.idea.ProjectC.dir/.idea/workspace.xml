@@ -49,9 +49,9 @@
         <option value="$PROJECT_DIR$/Engine/EnumSides.cs" />
         <option value="$PROJECT_DIR$/Engine/EnumTiles.cs" />
         <option value="$PROJECT_DIR$/Objects/Player.cs" />
-        <option value="$PROJECT_DIR$/World/ChunkedWorld.cs" />
         <option value="$PROJECT_DIR$/World/Chunk.cs" />
         <option value="$PROJECT_DIR$/Engine/Objects/Tile.cs" />
+        <option value="$PROJECT_DIR$/World/ChunkedWorld.cs" />
       </list>
     </option>
   </component>
