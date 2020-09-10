@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading;
+using ProjectC.Networking.Packets;
 
 namespace ProjectC.Client
 {
-    public class Client
+    public class GameClient
     {
         public TcpClient ClientSocket;
         public NetworkStream Stream;
         public Thread ClientThread;
         private bool Running = true;
-        public Client(string server, int port)
+        public GameClient(string server, int port)
         {
             Console.WriteLine("trying to connect to server");
             ClientSocket = new TcpClient(server,port);
@@ -21,14 +22,20 @@ namespace ProjectC.Client
             ClientThread.Start();
         }
 
-        public void Run()
+        private void Run()
         {
             while (Running)
             {
-                byte[] data = System.Text.Encoding.ASCII.GetBytes("Test Message");
+                Packet packet = new Packet(PacketType.Ping);
+
+                byte[] bytes = packet.ByteArray();
+
+                foreach (byte b in bytes)
+                {
+                    Console.WriteLine(b);
+                }
                 
-                Stream.Write(data,0,data.Length);
-                Console.WriteLine("Message Sent to Server");
+                Stream.Write(bytes,0,bytes.Length);
                 Disconnect();
             }
         }
