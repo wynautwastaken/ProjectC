@@ -1,1 +1,0 @@
-draw_text(5,5,"C for client, or S for both");
