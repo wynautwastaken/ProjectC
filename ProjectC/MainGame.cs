@@ -1,12 +1,16 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading;
 using ProjectC.Engine.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ProjectC.Client;
 using ProjectC.Engine.View;
-using ProjectC.Objects;
+using ProjectC.Networking.Packets;
 using ProjectC.World;
+using ProjectC.Networking.Server;
+using ProjectC.Objects;
 
 namespace ProjectC
 {
@@ -14,6 +18,9 @@ namespace ProjectC
     {
         public static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        public GameServer Server;
+        public GameClient Client;
         
         public MainGame()
         {
@@ -26,11 +33,20 @@ namespace ProjectC
         {
             // TODO: Add your initialization logic here
 
-            new Server.Server(IPAddress.Any, 7777);
+            new Player();
+            
+            Server = new GameServer(IPAddress.Any, 7777);
             Thread.Sleep(1000);
-            new Client.Client("127.0.0.1", 7777);
+            Client = new GameClient("127.0.0.1", 7777);
             
             base.Initialize();
+        }
+
+        protected override void EndRun()
+        {
+            Server.Stop();
+            Client.Disconnect();
+            base.EndRun();
         }
 
         protected override void LoadContent()
