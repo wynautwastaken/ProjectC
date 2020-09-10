@@ -51,6 +51,11 @@ namespace ProjectC.Networking.Packets
             return bytes.ToArray();
         }
 
+        public static object[] ReadPacket(byte[] bytes)
+        {
+            
+        }
+
         private static byte[] CreateByteArray(object obj)
         {
             List<byte> bytes = new List<byte>();
