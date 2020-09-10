@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.idea",
+    "\\.idea\\.idea.ProjectC.dir",
+    "\\.idea\\.idea.ProjectC.dir\\.idea",
+    "\\bin",
+    "\\bin\\Debug",
+    "\\bin\\Debug\\netcoreapp3.1",
+    "\\Content",
+    "\\Content\\obj",
+    "\\Content\\obj\\Windows"
+  ],
+  "SelectedNode": "\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}
