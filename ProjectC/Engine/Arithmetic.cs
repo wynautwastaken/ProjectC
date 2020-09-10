@@ -23,6 +23,10 @@ namespace ProjectC.Engine
                 {
                     bytes.RemoveAt(i);
                 }
+                else
+                {
+                    break;
+                }
             }
 
             return bytes.ToArray();
