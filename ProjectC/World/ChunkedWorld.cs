@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Net;
-using Microsoft.Xna.Framework;
 
 namespace ProjectC.World
 {
@@ -12,6 +10,7 @@ namespace ProjectC.World
         public static readonly Dictionary<ChunkIdentifier, Chunk> Chunks = new Dictionary<ChunkIdentifier, Chunk>();
         public static ChunkedWorld Instance = new ChunkedWorld();
         public static List<Chunk> ChunksLoaded;
+        public static WorldGenerator WorldGen;
         
         private ChunkedWorld()
         {
@@ -49,7 +48,7 @@ namespace ProjectC.World
             }
             else
             {
-                new WorldGenerator();
+                WorldGen = new WorldGenerator();
             }
         }
 
@@ -64,7 +63,7 @@ namespace ProjectC.World
             }
             return chunk;
         }
-        
+
         public static Chunk LoadChunk(ChunkIdentifier chunkid, Chunk chunk)
         {
             if (!Chunks.ContainsKey(chunkid))

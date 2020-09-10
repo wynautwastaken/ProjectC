@@ -8,7 +8,11 @@
       <e p="bin" t="ExcludeRecursive" />
       <e p="Content" t="Include">
         <e p="bin" t="Include">
+          <e p="dirt_grassy.xnb" t="Include" />
+          <e p="fresh_tile.xnb" t="Include" />
+          <e p="player_hmn.xnb" t="Include" />
           <e p="square.xnb" t="Include" />
+          <e p="stone.xnb" t="Include" />
           <e p="Windows" t="Include">
             <e p="Content" t="Include">
               <e p="dirt_grassy.xnb" t="Include" />
@@ -25,7 +29,11 @@
         <e p="obj" t="Include">
           <e p=".mgcontent" t="Include" />
           <e p=".mgstats" t="Include" />
+          <e p="dirt_grassy.mgcontent" t="Include" />
+          <e p="fresh_tile.mgcontent" t="Include" />
+          <e p="player_hmn.mgcontent" t="Include" />
           <e p="square.mgcontent" t="Include" />
+          <e p="stone.mgcontent" t="Include" />
           <e p="Windows" t="Include">
             <e p="Content" t="Include">
               <e p=".mgcontent" t="Include" />
@@ -62,7 +70,7 @@
         <e p="Client" t="Include">
           <e p="GameClient.cs" t="Include" />
         </e>
-        <e p="Packets" t="Include">
+        <e p="packets" t="Include">
           <e p="Packet.cs" t="Include" />
           <e p="PacketType.cs" t="Include" />
         </e>

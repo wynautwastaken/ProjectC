@@ -17,7 +17,6 @@ namespace ProjectC.World
                 for (var i = 0; i < 256; i++)
                 {
                     var n = GenNoise((c*255)+(i), 255f);
-                    Console.WriteLine(n);
                     for (var j = 255; j > n; j--)
                     {
                         var pos = new Vector2(i, j);
