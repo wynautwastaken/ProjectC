@@ -19,6 +19,7 @@ namespace ProjectC.Objects
     {
         public bool FacingRight = true;
         public static Player LocalClient;
+        public float WalkSpeed = 2;
         
         public Player()
         {
@@ -36,7 +37,7 @@ namespace ProjectC.Objects
             var a = Keyboard.GetState().IsKeyDown(Keys.A) ? 1 : 0;
             var s = Keyboard.GetState().IsKeyDown(Keys.S) ? 1 : 0;
             var d = Keyboard.GetState().IsKeyDown(Keys.D) ? 1 : 0;
-            position += new Vector2(d - a, s - w);
+            position += new Vector2(d - a, s - w) * WalkSpeed;
             var scroll = _oldScroll - Mouse.GetState().ScrollWheelValue;
             _oldScroll = Mouse.GetState().ScrollWheelValue;
             if (scroll > 0)

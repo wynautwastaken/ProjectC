@@ -8,15 +8,18 @@ namespace ProjectC.World
 {
     public class WorldGenerator
     {
-        public static int Seed = 6942069;
+        public static int Seed = 2;
         
         public WorldGenerator()
         {
+            float k = 0;
+            var rand = new Random(Seed);
             for (var c = 0; c < 10; c++)
             {
                 for (var i = 0; i < 256; i++)
                 {
-                    var n = GenNoise((c*255)+(i), 255f);
+                    k += (float)(rand.NextDouble() * 8);
+                    var n = GenNoise(k/2, 255f);
                     for (var j = 255; j > n; j--)
                     {
                         var pos = new Vector2(i, j);
