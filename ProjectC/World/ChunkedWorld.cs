@@ -47,6 +47,10 @@ namespace ProjectC.World
                     }
                 }
             }
+            else
+            {
+                new WorldGenerator();
+            }
         }
 
         public static Chunk LoadChunk(ChunkIdentifier chunkid)

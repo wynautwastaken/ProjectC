@@ -1,6 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/dirt_grassy.xnb","TextureProcessor","Texture2DContent",388,4181,0.709
-"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/fresh_tile.xnb","TextureProcessor","Texture2DContent",193,4181,0.352
-"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/player_hmn.xnb","TextureProcessor","Texture2DContent",670,2133,0.146
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/dirt_grassy.xnb","TextureProcessor","Texture2DContent",388,4181,0.169
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/fresh_tile.xnb","TextureProcessor","Texture2DContent",193,4181,0.008
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/player_hmn.xnb","TextureProcessor","Texture2DContent",670,2133,0.002
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/stone.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/stone.xnb","TextureProcessor","Texture2DContent",312,4181,0.002
-"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/square.xnb","TextureProcessor","Texture2DContent",86,1109,0.479
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/square.xnb","TextureProcessor","Texture2DContent",86,1109,0.002

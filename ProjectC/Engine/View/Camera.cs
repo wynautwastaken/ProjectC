@@ -19,7 +19,7 @@ namespace ProjectC.Engine.View
                            Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
                            Matrix.CreateTranslation(new Vector3(bounds.Width*0.5f,bounds.Height*0.5f,0));
 
-            _spriteBatch.Begin(SpriteSortMode.Texture,null,SamplerState.PointClamp,null,null,null,CameraMatrix);
+            _spriteBatch.Begin(SpriteSortMode.Deferred,null,SamplerState.PointClamp,null,null,null,CameraMatrix);
         }
 
         public static void draw(SpriteBatch _spriteBatch, GameObject gameObject)

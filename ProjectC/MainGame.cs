@@ -25,10 +25,13 @@ namespace ProjectC
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            /* commented out networking, bloo please uncomment this
             new Server.Server(IPAddress.Any, 7777);
             Thread.Sleep(1000);
             new Client.Client("127.0.0.1", 7777);
+            */
+            //added player spawn, bloo please remove this
+            new Player();
             
             base.Initialize();
         }
@@ -65,11 +68,11 @@ namespace ProjectC
 
             // draw logic
             Camera.startBatch(_spriteBatch);
-            foreach(Chunk chunk in ChunkedWorld.ChunksLoaded)
+            foreach(var chunk in ChunkedWorld.ChunksLoaded)
             {
-                chunk.Render(_spriteBatch);
+                Chunk.Render(_spriteBatch, chunk);
             }
-            foreach (GameObject gameObject in GameObject.Objects)
+            foreach (var gameObject in GameObject.Objects)
             {
                 Camera.draw(_spriteBatch,gameObject);
             }

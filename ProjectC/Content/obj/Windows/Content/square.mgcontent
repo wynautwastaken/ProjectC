@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png</SourceFile>
-  <SourceTime>2020-09-08T23:53:32.7518017-04:00</SourceTime>
+  <SourceTime>2020-09-10T08:39:28.482-04:00</SourceTime>
   <DestFile>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/square.xnb</DestFile>
-  <DestTime>2020-09-08T23:53:55.1678017-04:00</DestTime>
+  <DestTime>2020-09-10T09:11:03.249-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -14,41 +14,42 @@ namespace ProjectC.Engine.Objects
 {
     public class Tile : IChunkStorable
     {
-        private Texture2D _sheet;
-        private EnumSides _side = EnumSides.None;
-        private Vector2 _position;
+        private Texture2D Sheet;
+        private EnumSides Side = EnumSides.None;
+        private Vector2 Position;
         private Vector2 _chunkpos;
         private Chunk _chunk;
         public EnumTiles TileType { get; private set; } = EnumTiles.Air;
 
         public void SetType(EnumTiles type)
         {
-            _sheet = type switch
+            Sheet = type switch
             {
                 EnumTiles.Dirt => Sprites.TileDirtGrass,
                 EnumTiles.Fresh => Sprites.TileFresh,
                 EnumTiles.Grass => Sprites.TileDirtGrass,
                 EnumTiles.Stone => Sprites.TileStone,
                 EnumTiles.Air => null,
-                _ => _sheet
+                _ => Sheet
             };
             TileType = type;
         }
         
-        public Tile(EnumTiles type, Chunk chunk, Vector2 positionInWorld)
+        public Tile(EnumTiles type, Chunk chunk, Vector2 positionInChunk)
         {
             _chunk = chunk;
-            _position = positionInWorld;
-            _chunkpos = chunk.WorldToChunk(positionInWorld);
+            Position = chunk.ChunkToWorld(positionInChunk);
+            _chunkpos = positionInChunk;
             SetType(type);
             chunk.PlaceTile(this, _chunkpos);
         }
 
-        public void Render(SpriteBatch batch)
+        public static void Render(SpriteBatch batch, Tile tile)
         {
-            if (_sheet != null)
+            
+            if (tile.Sheet != null)
             {
-                batch.Draw(_sheet, _position, new Rectangle(new Point((int)_side % 4, (int)_side / 4), new Point(8,8)), Color.White);
+                batch.Draw(tile.Sheet, tile.Position, new Rectangle(new Point((int)tile.Side % 4, (int)tile.Side / 4), new Point(8,8)), Color.White);
             }
         }
         
@@ -59,93 +60,97 @@ namespace ProjectC.Engine.Objects
             var foundchunk = ChunkedWorld.LoadChunk(new ChunkIdentifier((int)x, (int)y));
             if (foundchunk == null) return false;
             var tile = foundchunk.GetTileFrom(foundchunk.WorldToChunk(position));
-            return tile.TileType != EnumTiles.Air;
+            if (tile != null)
+            {
+                return tile.TileType != EnumTiles.Air;
+            }
+            return false;
         }
 
         private void UpdateSide()
         {
             bool left = false, right = false, up = false, down = false;
             
-            if (IsTileAt(_position - new Vector2(8, 0)))
+            if (IsTileAt(Position - new Vector2(8, 0)))
             {
                 left = true;
             };
-            if (IsTileAt(_position + new Vector2(8, 0)))
+            if (IsTileAt(Position + new Vector2(8, 0)))
             {
                 right = true;
             };
-            if (IsTileAt(_position + new Vector2(0, 8)))
+            if (IsTileAt(Position + new Vector2(0, 8)))
             {
                 up = true;
             };
-            if (IsTileAt(_position - new Vector2(0, 8)))
+            if (IsTileAt(Position - new Vector2(0, 8)))
             {
                 down = true;
             }
 
             if (!left && right && !up && !down)
             {
-                _side = EnumSides.Left;
+                Side = EnumSides.Left;
             }
             if (left && !right && !up && !down)
             {
-                _side = EnumSides.Right;
+                Side = EnumSides.Right;
             }
             if (!left && !right && !up && down)
             {
-                _side = EnumSides.Top;
+                Side = EnumSides.Top;
             }
             if (!left && !right && up && !down)
             {
-                _side = EnumSides.Bottom;
+                Side = EnumSides.Bottom;
             }
             
             if (left && right && !up && !down)
             {
-                _side = EnumSides.MiddleHorizontal;
+                Side = EnumSides.MiddleHorizontal;
             }
             if (!left && !right && up && down)
             {
-                _side = EnumSides.MiddleVertical;
+                Side = EnumSides.MiddleVertical;
             }
             if (left && !right && up && down)
             {
-                _side = EnumSides.MiddleRight;
+                Side = EnumSides.MiddleRight;
             }
             if (left && right && up && down)
             {
-                _side = EnumSides.Middle;
+                Side = EnumSides.Middle;
             }
             if (!left && right && up && down)
             {
-                _side = EnumSides.MiddleLeft;
+                Side = EnumSides.MiddleLeft;
             }
             
             if (!left && right && !up && down)
             {
-                _side = EnumSides.TopLeft;
+                Side = EnumSides.TopLeft;
             }
             if (left && right && !up && down)
             {
-                _side = EnumSides.TopMiddle;
+                Side = EnumSides.TopMiddle;
             }
             if (left && !right && !up && down)
             {
-                _side = EnumSides.TopRight;
+                Side = EnumSides.TopRight;
             }
             
             
             if (!left && right && up && !down)
             {
-                _side = EnumSides.BottomLeft;
+                Side = EnumSides.BottomLeft;
             }
             if (left && right && up && !down)
             {
-                _side = EnumSides.BottomMiddle;
+                Side = EnumSides.BottomMiddle;
             }
             if (left && !right && up && !down)
             {
-                _side = EnumSides.BottomRight;
+                Side = EnumSides.BottomRight;
             }
         }
         
@@ -164,8 +169,8 @@ namespace ProjectC.Engine.Objects
             var json = new JsonObject();
             json.Add("type", "tile");
             var pos = new JsonObject();
-            pos.Add("x", _position.X);
-            pos.Add("y",_position.Y);
+            pos.Add("x", Position.X);
+            pos.Add("y",Position.Y);
             json.Add("position", pos);
             json.Add("tiletype", (int)TileType);
             return json;

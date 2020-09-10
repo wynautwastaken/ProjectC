@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Json;
 using Microsoft.Xna.Framework.Graphics;
@@ -58,6 +59,7 @@ namespace ProjectC.World
     {
         private Vector2 WorldPos;
         private Tile[,] Tiles = new Tile[256,256];
+        private List<Tile> ExistentTiles = new List<Tile>();
         public ChunkIdentifier ChunkId;
         public Chunk(Vector2 position)
         {
@@ -96,7 +98,9 @@ namespace ProjectC.World
                         ((JsonObject) pos).TryGetValue("y", out var yy);
                         var x = (int) xx;
                         var y = (int) yy;
-                        Tiles[(x / 256) / 8,(y / 256) / 8] = new Tile(tile, this, new Vector2(x,y));
+                        var ntile = new Tile(tile, this, new Vector2(x, y));
+                        Tiles[(x / 256) / 8,(y / 256) / 8] = ntile;
+                        ExistentTiles.Add(ntile);
                     }
                 }
             }
@@ -122,15 +126,16 @@ namespace ProjectC.World
         public bool PlaceTile(Tile tile, Vector2 position)
         {
             var (x, y) = position;
-            Tiles[(int) x, (int) y] = tile;
+            Tiles[(int) x % 256, (int) y % 256] = tile;
+            ExistentTiles.Add(tile);
             return true;
         }
 
-        public void Render(SpriteBatch batch)
+        public static void Render(SpriteBatch batch, Chunk chunk)
         {
-            foreach (var tile in Tiles)
+            foreach (var tile in chunk.ExistentTiles)
             {
-                tile?.Render(batch);
+                Tile.Render(batch, tile);
             }
         }
         
@@ -154,6 +159,11 @@ namespace ProjectC.World
             if (pos.X < 0) pos.X += 255;
             if (pos.Y < 0) pos.Y += 255; 
             return pos;
+        }
+
+        public Vector2 ChunkToWorld(Vector2 position)
+        {
+            return (position*8) + WorldPos;
         }
     }
 }

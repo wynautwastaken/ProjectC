@@ -18,9 +18,11 @@ namespace ProjectC.Objects
     public class Player : GameObject
     {
         public bool FacingRight = true;
+        public static Player LocalClient;
         
         public Player()
         {
+            LocalClient = this;
             origin = new Vector2(12,24);
         }
         
@@ -56,6 +58,16 @@ namespace ProjectC.Objects
                 Camera.zoom /= 0.9f;
             }
 
+            Camera.Position = position * new Vector2(-1,1);
+            
+            while (Tile.IsTileAt(position))
+            {
+                position.Y--;
+            }
+            if (!Tile.IsTileAt(position + new Vector2(0, 1)))
+            {
+                position.Y += 8;
+            }
             var click = Mouse.GetState().LeftButton.Equals(ButtonState.Pressed);
             if (click)
             {
@@ -66,9 +78,11 @@ namespace ProjectC.Objects
                 var len = Math.Clamp(clampedpos.Length(), 8, 96);
                 clampedpos.Normalize();
                 clampedpos *= len;
+                var chunk = ChunkedWorld.LoadChunk(new ChunkIdentifier((int) ((pos.X / 8) / 256),
+                    (int) ((pos.Y / 8) / 256)));
                 new Tile(EnumTiles.Fresh,
-                    ChunkedWorld.LoadChunk(new ChunkIdentifier((int) ((pos.X / 8) / 256), (int) ((pos.Y / 8) / 256))),
-                    Tile.SnapToGrid(position + clampedpos));
+                    chunk,
+                    chunk.WorldToChunk(position + clampedpos));
             }
 
             var save = Keyboard.GetState().IsKeyDown(Keys.K);
@@ -86,7 +100,7 @@ namespace ProjectC.Objects
             {
                 Vector2 newOrigin = origin;
                 var facingflip = FacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-                _spriteBatch.Draw(sprite, position - newOrigin, null, Color.White, 0, newOrigin, Vector2.One, facingflip, 0);
+                _spriteBatch.Draw(sprite, position - new Vector2(0,8), null, Color.White, 0, newOrigin, Vector2.One, facingflip, 0);
             }
         }
     }
