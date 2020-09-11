@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Json;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using ProjectC.Engine.Objects;
+using SharpDX.Direct3D11;
 
 namespace ProjectC.World
 {
@@ -9,12 +15,12 @@ namespace ProjectC.World
     {
         public static readonly Dictionary<ChunkIdentifier, Chunk> Chunks = new Dictionary<ChunkIdentifier, Chunk>();
         public static ChunkedWorld Instance = new ChunkedWorld();
-        public static List<Chunk> ChunksLoaded;
+        public static Chunk[] ChunksLoaded;
         public static WorldGenerator WorldGen;
         
         private ChunkedWorld()
         {
-            ChunksLoaded = new List<Chunk>();
+            ChunksLoaded = new Chunk[256];
             Load();
         }
 
@@ -55,13 +61,26 @@ namespace ProjectC.World
         public static Chunk LoadChunk(ChunkIdentifier chunkid)
         {
             Chunks.TryGetValue(chunkid, out var chunk);
-            if (!Chunks.ContainsKey(chunkid))
-            {
-                chunk = new Chunk(chunkid.Pos * 256 * 8);
-                Chunks.Add(chunkid, chunk);
-                ChunksLoaded.Add(chunk);
-            }
-            return chunk;
+            if (Chunks.ContainsKey(chunkid)) return chunk;
+            var chonk = new Chunk(chunkid.Pos);
+            Chunks.Add(chunkid, chonk);
+            var ind = NewIndex(ChunksLoaded);
+            ChunksLoaded[ind] = chonk;
+            return chonk;
+        }
+
+        public static bool IsChunkLoaded(Chunk chunk)
+        {
+            return ChunksLoaded.Any(c => c == chunk);
+        }
+        public static bool DoesChunkExist(ChunkIdentifier pos)
+        {
+            return Chunks.ContainsKey(pos);
+        }
+        
+        public static int NewIndex(Array arr)
+        {
+            return Array.IndexOf(arr, null);
         }
 
         public static Chunk LoadChunk(ChunkIdentifier chunkid, Chunk chunk)
@@ -70,11 +89,11 @@ namespace ProjectC.World
             {
                 Chunks.Add(chunkid, chunk);
             }
-            if (!ChunksLoaded.Contains(chunk))
-            {
-                ChunksLoaded.Add(chunk);
-            }
 
+            if (!IsChunkLoaded(chunk))
+            {
+                ChunksLoaded[NewIndex(ChunksLoaded)] = chunk;
+            }
             return chunk;
         }
     }

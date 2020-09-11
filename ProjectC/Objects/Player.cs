@@ -67,9 +67,9 @@ namespace ProjectC.Objects
             }
             if (!Tile.IsTileAt(position + new Vector2(0, 1)))
             {
-                position.Y += 8;
+                position.Y += Tile.TileSize;
             }
-            var click = Mouse.GetState().LeftButton.Equals(ButtonState.Pressed);
+            var click = Mouse.GetState().LeftButton == ButtonState.Pressed;
             if (click)
             {
                 var pos = Mouse.GetState().Position.ToVector2();
@@ -79,11 +79,10 @@ namespace ProjectC.Objects
                 var len = Math.Clamp(clampedpos.Length(), 8, 96);
                 clampedpos.Normalize();
                 clampedpos *= len;
-                var chunk = ChunkedWorld.LoadChunk(new ChunkIdentifier((int) ((pos.X / 8) / 256),
-                    (int) ((pos.Y / 8) / 256)));
+                var chunk = ChunkedWorld.LoadChunk(new ChunkIdentifier((int) ((pos.X / Tile.TileSize) / Chunk.ChunkWidth),
+                    (int) ((pos.Y / Tile.TileSize) / Chunk.ChunkHeight)));
                 new Tile(EnumTiles.Fresh,
-                    chunk,
-                    chunk.WorldToChunk(position + clampedpos));
+                    chunk, chunk.WorldToChunk(position + clampedpos));
             }
 
             var save = Keyboard.GetState().IsKeyDown(Keys.K);

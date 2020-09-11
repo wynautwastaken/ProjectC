@@ -14,6 +14,8 @@ namespace ProjectC.Engine.Objects
 {
     public class Tile : IChunkStorable
     {
+        public const int TileSize = 8;
+
         private Texture2D Sheet;
         private EnumSides Side = EnumSides.None;
         private Vector2 Position;
@@ -42,48 +44,55 @@ namespace ProjectC.Engine.Objects
             _chunkpos = positionInChunk;
             SetType(type);
             chunk.PlaceTile(this, _chunkpos);
+            var id = ChunkedWorld.NewIndex(chunk.ExistentTiles);
+            if (id >= chunk.ExistentTiles.Length || id < 0) return;
+            chunk.ExistentTiles[id] = this;
         }
 
         public static void Render(SpriteBatch batch, Tile tile)
         {
-            
             if (tile.Sheet != null)
             {
-                batch.Draw(tile.Sheet, tile.Position, new Rectangle(new Point((int)tile.Side % 4, (int)tile.Side / 4), new Point(8,8)), Color.White);
+                batch.Draw(tile.Sheet, tile.Position, new Rectangle(new Point((int)tile.Side % 4, (int)tile.Side / 4), new Point(TileSize,TileSize)), Color.White);
             }
         }
         
         public static bool IsTileAt(Vector2 position)
         {
-            var (x, y) = (position / 8) / 256;
+            var (x, y) = (position / TileSize) / new Vector2(Chunk.ChunkWidth, Chunk.ChunkHeight);
             
             var foundchunk = ChunkedWorld.LoadChunk(new ChunkIdentifier((int)x, (int)y));
-            if (foundchunk == null) return false;
-            var tile = foundchunk.GetTileFrom(foundchunk.WorldToChunk(position));
-            if (tile != null)
-            {
-                return tile.TileType != EnumTiles.Air;
-            }
-            return false;
+            var tile = foundchunk?.GetTileFrom(foundchunk.WorldToChunk(position));
+            if (tile == null) return false;
+            return tile.TileType != EnumTiles.Air;
+        }
+        public static bool IsTileAt(Vector2 position, Chunk chunk)
+        {
+            var (x, y) = (position / TileSize) / new Vector2(Chunk.ChunkWidth, Chunk.ChunkHeight);
+
+            var foundchunk = chunk;
+            var tile = foundchunk?.GetTileFrom(foundchunk.WorldToChunk(position));
+            if (tile == null) return false;
+            return tile.TileType != EnumTiles.Air;
         }
 
         private void UpdateSide()
         {
             bool left = false, right = false, up = false, down = false;
             
-            if (IsTileAt(Position - new Vector2(8, 0)))
+            if (IsTileAt(Position - new Vector2(TileSize, 0), _chunk))
             {
                 left = true;
             };
-            if (IsTileAt(Position + new Vector2(8, 0)))
+            if (IsTileAt(Position + new Vector2(TileSize, 0), _chunk))
             {
                 right = true;
             };
-            if (IsTileAt(Position + new Vector2(0, 8)))
+            if (IsTileAt(Position + new Vector2(0, TileSize), _chunk))
             {
                 up = true;
             };
-            if (IsTileAt(Position - new Vector2(0, 8)))
+            if (IsTileAt(Position - new Vector2(0, TileSize), _chunk))
             {
                 down = true;
             }
@@ -161,7 +170,7 @@ namespace ProjectC.Engine.Objects
 
         public static Vector2 SnapToGrid(Vector2 toSnap)
         {
-            return Vector2.Floor(toSnap / 8) * 8;
+            return Vector2.Floor(toSnap / TileSize) * TileSize;
         }
 
         public JsonObject Save()
