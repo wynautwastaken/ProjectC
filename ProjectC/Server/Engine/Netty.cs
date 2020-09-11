@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading;
-using ProjectC.Engine;
+using ProjectC.Networking.Packets;
+using ProjectC.Networking.Server;
 
-namespace ProjectC.Networking.Server
+namespace ProjectC.Server.Engine
 {
     /**
      * This thread will handle individual player packets
@@ -21,12 +22,14 @@ namespace ProjectC.Networking.Server
                 NetworkStream networkStream = ClientSocket.GetStream();
                 byte[] bytesFrom = new byte[1025];
                 networkStream.Read(bytesFrom, 0, bytesFrom.Length);
-                bytesFrom = Arithmetic.TrimByteArray(bytesFrom);
                 
-                Console.WriteLine("Data");
-                foreach (byte b in bytesFrom)
+                BufferReader reader = new BufferReader(bytesFrom);
+
+                switch (reader.ReadEnum<PacketType>())
                 {
-                    Console.WriteLine(b);
+                    case PacketType.Ping:
+                        Console.WriteLine("Ping!");
+                        break;
                 }
                 
                 return;

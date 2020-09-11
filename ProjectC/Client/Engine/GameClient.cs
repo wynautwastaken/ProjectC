@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading;
+using ProjectC.Engine;
 using ProjectC.Networking.Packets;
 
 namespace ProjectC.Client
@@ -24,17 +25,13 @@ namespace ProjectC.Client
 
         private void Run()
         {
-            while (Running)
+            while (ClientSocket.Connected)
             {
-                Packet packet = new Packet(PacketType.Ping);
+                BufferWriter buffer = new BufferWriter(1);
+                buffer.WriteEnum(PacketType.Ping);
 
-                byte[] bytes = packet.ByteArray();
+                byte[] bytes = buffer.Buffer;
 
-                foreach (byte b in bytes)
-                {
-                    Console.WriteLine(b);
-                }
-                
                 Stream.Write(bytes,0,bytes.Length);
                 Disconnect();
             }

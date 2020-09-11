@@ -360,3 +360,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# temp rider filed
+/.idea/
+/Content/obj/
+/Content/bin/
