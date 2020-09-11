@@ -361,7 +361,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# rider
-.idea/
-obj/
-bin/
+# why do u do this to me
+**/.idea/**
+**/Content/obj/**
+**/Content/bin/**
