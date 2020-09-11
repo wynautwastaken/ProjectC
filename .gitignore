@@ -362,6 +362,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # why do u do this to me
-**/.idea/**
-**/Content/obj/**
-**/Content/bin/**
+ProjectC/.idea/**
+ProjectC/Content/obj/**
+ProjectC/Content/obj/**/Content/bin/**
