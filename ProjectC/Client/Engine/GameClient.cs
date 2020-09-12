@@ -14,9 +14,8 @@ namespace ProjectC.Client
         private bool Running = true;
         public GameClient(string server, int port)
         {
-            Console.WriteLine("trying to connect to server");
+            Console.WriteLine("Client Connecting to Server");
             ClientSocket = new TcpClient(server,port);
-            Thread.Sleep(1000);
             Stream = ClientSocket.GetStream();
             ThreadStart start = new ThreadStart(Run);
             ClientThread = new Thread(start);

@@ -40,7 +40,6 @@ namespace ProjectC
             int port = PortScanner.ScanTcpPorts(IPAddress.Loopback);
 
             Server = new GameServer(IPAddress.Loopback, port);
-            Thread.Sleep(1000);
             Client = new GameClient("127.0.0.1", port);
             
             base.Initialize();

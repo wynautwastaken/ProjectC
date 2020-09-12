@@ -16,7 +16,7 @@ namespace ProjectC.Networking.Server
         public Thread ServerThread;
         public bool Running = true;
 
-        public static List<Netty> clientList = new List<Netty>();
+        public static List<ClientConnection> clientList = new List<ClientConnection>();
 
         private void Run()
         {
@@ -24,8 +24,9 @@ namespace ProjectC.Networking.Server
             {
                 try
                 {
+                    Console.WriteLine("Ready for Connection");
                     TcpClient clientSocket = ServerSocket.AcceptTcpClient(); // accept connection
-                    new Netty(clientSocket);
+                    new ClientConnection(clientSocket);
                 }
                 catch (SocketException e)
                 {
@@ -42,7 +43,7 @@ namespace ProjectC.Networking.Server
             ServerSocket.Stop();
             Running = false;
 
-            foreach (Netty client in clientList)
+            foreach (ClientConnection client in clientList)
             {
                 client.Disconnect();
             }
@@ -56,7 +57,7 @@ namespace ProjectC.Networking.Server
             ServerSocket.Start();
             
             Console.WriteLine("Starting Server Thread");
-            ServerThread = new Thread(new ThreadStart(Run));
+            ServerThread = new Thread(Run);
             ServerThread.Start();
         }
     }

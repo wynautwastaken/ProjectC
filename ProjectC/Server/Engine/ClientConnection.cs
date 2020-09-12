@@ -9,7 +9,7 @@ namespace ProjectC.Server.Engine
     /**
      * This thread will handle individual player packets
      */
-    public class Netty
+    public class ClientConnection
     {
         public TcpClient ClientSocket;
         public static Thread NettyThread;
@@ -36,13 +36,20 @@ namespace ProjectC.Server.Engine
             }
         }
 
+        public void SendBuffer(BufferWriter buffer)
+        {
+             NetworkStream stream = ClientSocket.GetStream();
+             stream.Write(buffer.Buffer);
+             stream.Flush();
+        }
+
         public void Disconnect()
         {
             ClientSocket.Close();
             running = false;
         }
         
-        public Netty(TcpClient socket)
+        public ClientConnection(TcpClient socket)
         {
             ClientSocket = socket;
             GameServer.clientList.Add(this);
