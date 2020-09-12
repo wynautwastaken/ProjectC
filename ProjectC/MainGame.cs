@@ -11,6 +11,7 @@ using ProjectC.Networking.Packets;
 using ProjectC.World;
 using ProjectC.Networking.Server;
 using ProjectC.Objects;
+using ProjectC.Universal.Networking;
 
 namespace ProjectC
 {
@@ -35,9 +36,12 @@ namespace ProjectC
 
             new Player();
             
-            Server = new GameServer(IPAddress.Any, 7777);
+            Console.WriteLine("Scanning Ports");
+            int port = PortScanner.ScanTcpPorts(IPAddress.Loopback);
+
+            Server = new GameServer(IPAddress.Loopback, port);
             Thread.Sleep(1000);
-            Client = new GameClient("127.0.0.1", 7777);
+            Client = new GameClient("127.0.0.1", port);
             
             base.Initialize();
         }
