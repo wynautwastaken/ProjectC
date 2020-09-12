@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace ProjectC.world
 {
@@ -8,10 +9,13 @@ namespace ProjectC.world
         {
             for (var i = 0; i < Chunk.ChunkWidth; i++)
             {
-                var n = NoiseGenerator.GenNoise(chunk.Position.X, 255f);
+                var n = NoiseGenerator.GenNoise(chunk.Position.X, (Chunk.ChunkHeight));
+                n = Math.Clamp(n, 0, Chunk.ChunkHeight-1);
                 for (var j = Chunk.ChunkHeight-1; j < n; j--)
                 {
-                    new Tile(EnumTiles.Fresh, chunk, new Point(i, j));
+                    var pos = new Point(i, j);
+                    Console.WriteLine(pos.ToString());
+                    new Tile(EnumTiles.Fresh, chunk, pos);
                 }
             }
         }

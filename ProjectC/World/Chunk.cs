@@ -15,15 +15,18 @@ namespace ProjectC.world
         
         public Tile[,] Tiles = new Tile[32,96];
 
-        public Chunk(Point id)
+        public Chunk(Point id, bool dontLoad = false)
         {
             Position = id.ToVector2() * new Vector2(ChunkWidth, ChunkHeight) * Tile.TileSize;
-            Dimention.LoadChunk(this);
+            if (!dontLoad)
+            {
+                Dimention.LoadChunk(this);
+            }
         }
         
         public static void Draw(SpriteBatch batch, Chunk chunk)
         {
-            batch.Draw(Sprites.Rectangle,new Rectangle(chunk.Position.ToPoint(),new Point(32*8,96*8)), Color.White);
+            //batch.Draw(Sprites.Rectangle,new Rectangle(chunk.Position.ToPoint(),new Point(32*8,96*8)), Color.White);
             foreach (var tile in chunk.Tiles)
             {
                 if (tile != null)
@@ -56,6 +59,11 @@ namespace ProjectC.world
         public bool Load(string data)
         {
             throw new System.NotImplementedException();
+        }
+
+        public Tile TileFrom(Point position)
+        {
+            return Tiles[position.X, position.Y];
         }
     }
 }

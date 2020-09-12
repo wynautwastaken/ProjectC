@@ -28,7 +28,6 @@ namespace ProjectC
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
             Sprites.Square = this.Content.Load<Texture2D>("square");
             Sprites.TileDirtGrass = this.Content.Load<Texture2D>("dirt_grassy");
             Sprites.TileStone = this.Content.Load<Texture2D>("stone");
