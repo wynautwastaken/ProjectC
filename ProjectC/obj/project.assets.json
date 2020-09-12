@@ -577,6 +577,15 @@
           "lib/netcoreapp1.0/SharpDX.XInput.dll": {}
         }
       },
+      "SpriteFontPlus/0.8.1.40": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/SpriteFontPlus.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SpriteFontPlus.dll": {}
+        }
+      },
       "System.AppContext/4.1.0": {
         "type": "package",
         "dependencies": {
@@ -3036,6 +3045,19 @@
         "lib/uap10.0/SharpDX.XInput.xml",
         "sharpdx.xinput.4.0.1.nupkg.sha512",
         "sharpdx.xinput.nuspec"
+      ]
+    },
+    "SpriteFontPlus/0.8.1.40": {
+      "sha512": "gAjIBHV3q0os61Tsd9PlmWb56tQBoPQYg8yKH3NM3cMzKofpOLzOwK0AIarKU7WyZrDMwYcp+VY9A43JSrUx/Q==",
+      "type": "package",
+      "path": "spritefontplus/0.8.1.40",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/SpriteFontPlus.dll",
+        "lib/netstandard2.0/SpriteFontPlus.dll",
+        "spritefontplus.0.8.1.40.nupkg.sha512",
+        "spritefontplus.nuspec"
       ]
     },
     "System.AppContext/4.1.0": {
@@ -7359,6 +7381,7 @@
     ".NETCoreApp,Version=v3.1": [
       "MonoGame.Content.Builder.Task >= 3.8.0.1641",
       "MonoGame.Framework.WindowsDX >= 3.8.0.1641",
+      "SpriteFontPlus >= 0.8.1.40",
       "System.Json >= 4.7.1"
     ]
   },
@@ -7408,6 +7431,10 @@
           "MonoGame.Framework.WindowsDX": {
             "target": "Package",
             "version": "[3.8.0.1641, )"
+          },
+          "SpriteFontPlus": {
+            "target": "Package",
+            "version": "[0.8.1.40, )"
           },
           "System.Json": {
             "target": "Package",

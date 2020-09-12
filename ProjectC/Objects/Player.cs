@@ -1,25 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ProjectC.Engine;
-using ProjectC.Engine.Objects;
-using ProjectC.Engine.View;
-using ProjectC.World;
-using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
-using Keys = Microsoft.Xna.Framework.Input.Keys;
+using ProjectC.world;
+using ProjectC.view;
 
-namespace ProjectC.Objects
+namespace ProjectC.objects
 {
-    public class Player : GameObject
+    public class Player : Entity
     {
         public bool FacingRight = true;
-        public static Player LocalClient;
+        public static Player LocalClient = new Player();
         public float WalkSpeed = 2;
+        public Dimention CurrentDimention = new Dimention();
         
         public Player()
         {
@@ -60,15 +53,9 @@ namespace ProjectC.Objects
             }
 
             Camera.Position = position * new Vector2(-1,1);
-            
-            while (Tile.IsTileAt(position))
-            {
-                position.Y--;
-            }
-            if (!Tile.IsTileAt(position + new Vector2(0, 1)))
-            {
-                position.Y += Tile.TileSize;
-            }
+            var (x, y) = new Point(((int)position.X / Tile.TileSize) / Chunk.ChunkWidth, ((int)position.Y / Tile.TileSize) / Chunk.ChunkHeight);
+            var pchunk = CurrentDimention.LoadChunk(new Point(x,y), true);
+            var tpos = pchunk.WorldToChunk(position);
             var click = Mouse.GetState().LeftButton == ButtonState.Pressed;
             if (click)
             {
@@ -79,16 +66,16 @@ namespace ProjectC.Objects
                 var len = Math.Clamp(clampedpos.Length(), 8, 96);
                 clampedpos.Normalize();
                 clampedpos *= len;
-                var chunk = ChunkedWorld.LoadChunk(new ChunkIdentifier((int) ((pos.X / Tile.TileSize) / Chunk.ChunkWidth),
-                    (int) ((pos.Y / Tile.TileSize) / Chunk.ChunkHeight)));
-                new Tile(EnumTiles.Fresh,
-                    chunk, chunk.WorldToChunk(position + clampedpos));
+                var npos = position + clampedpos;
+                var chunk = CurrentDimention.LoadChunk(new Vector2((npos.X / Tile.TileSize) / Chunk.ChunkWidth, (npos.Y / Tile.TileSize) / Chunk.ChunkHeight).ToPoint(), true);
+                var chunkpos = chunk.WorldToChunk(npos);
+                var tile = new Tile(EnumTiles.Grass, chunk, chunkpos);
             }
 
             var save = Keyboard.GetState().IsKeyDown(Keys.K);
             if (save)
             {
-                ChunkedWorld.Save();
+                CurrentDimention.Save();
             }
 
             Camera.zoom = Math.Clamp(Camera.zoom, 0.5f, 4f);

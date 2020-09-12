@@ -16,9 +16,10 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+    <PackageReference Include="SpriteFontPlus" Version="0.8.1.40" />
     <PackageReference Include="System.Json" Version="4.7.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Objects\Entities" />
+    <Folder Include="objects\entities" />
   </ItemGroup>
 </Project>

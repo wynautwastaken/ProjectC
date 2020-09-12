@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[3.8.0.1641, )"
             },
+            "SpriteFontPlus": {
+              "target": "Package",
+              "version": "[0.8.1.40, )"
+            },
             "System.Json": {
               "target": "Package",
               "version": "[4.7.1, )"

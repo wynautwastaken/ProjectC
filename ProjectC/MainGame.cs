@@ -1,16 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Threading;
-using ProjectC.Engine.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ProjectC.Client;
-using ProjectC.Engine.View;
-using ProjectC.Networking.Packets;
-using ProjectC.World;
-using ProjectC.Networking.Server;
-using ProjectC.Objects;
+using ProjectC.objects;
+using ProjectC.view;
+using ProjectC.world;
+using SpriteFontPlus;
 
 namespace ProjectC
 {
@@ -19,34 +17,11 @@ namespace ProjectC
         public static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public GameServer Server;
-        public GameClient Client;
-
         public MainGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-        }
-
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            new Player();
-
-            Server = new GameServer(IPAddress.Any, 7777);
-            Thread.Sleep(1000);
-            Client = new GameClient("127.0.0.1", 7777);
-
-            base.Initialize();
-        }
-
-        protected override void EndRun()
-        {
-            Server.Stop();
-            Client.Disconnect();
-            base.EndRun();
         }
 
         protected override void LoadContent()
@@ -59,6 +34,11 @@ namespace ProjectC
             Sprites.TileStone = this.Content.Load<Texture2D>("stone");
             Sprites.TileFresh = this.Content.Load<Texture2D>("fresh_tile");
             Sprites.PlayerHuman = this.Content.Load<Texture2D>("player_hmn");
+            Sprites.Rectangle = this.Content.Load<Texture2D>("chunk");
+            var font = File.ReadAllBytes(this.Content.RootDirectory + "/font.ttf");
+            var res = TtfFontBaker.Bake(font,32,512,512,new CharacterRange[] {new CharacterRange(' ','~') });
+            Sprites.Font = res.CreateSpriteFont(GraphicsDevice);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,8 +47,9 @@ namespace ProjectC
                 Exit();
 
             // step logic
-            foreach (GameObject gameObject in GameObject.Objects)
+            foreach (var obj in Dimention.Current.AllLoadedThings(EnumStorables.GameObjects))
             {
+                var gameObject = (GameObject) obj;
                 gameObject.step();
             }
 
@@ -78,19 +59,21 @@ namespace ProjectC
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            
             // draw logic
             Camera.startBatch(_spriteBatch);
-            foreach(var chunk in ChunkedWorld.ChunksLoaded)
+            foreach (var obj in Dimention.Current.AllLoadedThings(EnumStorables.Chunks))
             {
-                Chunk.Render(_spriteBatch, chunk);
+                Chunk.Draw(_spriteBatch, (Chunk)obj);
             }
-            foreach (var gameObject in GameObject.Objects)
+            foreach (var obj in Dimention.Current.AllLoadedThings(EnumStorables.GameObjects))
             {
-                Camera.draw(_spriteBatch,gameObject);
+                Camera.draw(_spriteBatch, (GameObject)obj);
             }
-            _spriteBatch.End();
 
+            _spriteBatch.DrawString(Sprites.Font, "test text is testing a testy test.", Player.LocalClient.position + Player.LocalClient.origin, Color.White);
+            _spriteBatch.End();
+            
             base.Draw(gameTime);
         }
     }

@@ -1,8 +1,8 @@
 ﻿using System.Json;
 
-namespace ProjectC.World
+namespace ProjectC.world
 {
-    public interface IChunkStorable
+    public interface IStorable
     {
         public JsonObject Save();
         public bool Load(string data);

@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/chunk.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png</File>
@@ -11,6 +12,7 @@
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

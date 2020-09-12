@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using ProjectC.Engine.Objects;
+using ProjectC.objects;
 
-namespace ProjectC.Engine.View
+namespace ProjectC.view
 {
     public class Camera
     {

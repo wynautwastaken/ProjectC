@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace ProjectC.Engine.View
+namespace ProjectC.view
 {
     public static class Sprites
     {
@@ -9,5 +9,7 @@ namespace ProjectC.Engine.View
         public static Texture2D TileStone;
         public static Texture2D TileFresh;
         public static Texture2D PlayerHuman;
+        public static Texture2D Rectangle;
+        public static SpriteFont Font;
     }
 }

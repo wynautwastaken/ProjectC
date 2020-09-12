@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IusLoX3uPFEzCpQM++Am9gAdg2HCLeUVe51gmPS3VhW0BEV/VvJ18bRdkyIy6+07p1UQF3WA/bdR6ZC/frdyIw==",
+  "dgSpecHash": "UPe0B9gvv8hu826wKrCQjQ+Byq9VIE6v3u2CsrY1YctAzwTAIxtPOTLaJF8p3BO1o3j/nb5RZmYjtKmXJvM3kQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Cal\\Documents\\GitHub\\ProjectC\\ProjectC\\ProjectC.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\Cal\\.nuget\\packages\\sharpdx.mediafoundation\\4.0.1\\sharpdx.mediafoundation.4.0.1.nupkg.sha512",
     "C:\\Users\\Cal\\.nuget\\packages\\sharpdx.xaudio2\\4.0.1\\sharpdx.xaudio2.4.0.1.nupkg.sha512",
     "C:\\Users\\Cal\\.nuget\\packages\\sharpdx.xinput\\4.0.1\\sharpdx.xinput.4.0.1.nupkg.sha512",
+    "C:\\Users\\Cal\\.nuget\\packages\\spritefontplus\\0.8.1.40\\spritefontplus.0.8.1.40.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.0.0\\system.buffers.4.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.0.11\\system.collections.4.0.11.nupkg.sha512",
