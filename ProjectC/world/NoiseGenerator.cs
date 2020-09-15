@@ -19,7 +19,7 @@ namespace ProjectC.world
 
             float chunkSize = 32;
 
-            range = range / 2;
+            range /= 2;
 
             while(chunkSize > 0){
                 float chunkIndex = xx / chunkSize;

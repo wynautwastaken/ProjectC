@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,6 +10,8 @@ using ProjectC.objects;
 using ProjectC.view;
 using ProjectC.world;
 using SpriteFontPlus;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace ProjectC
 {
@@ -16,12 +19,16 @@ namespace ProjectC
     {
         public static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        public static int DrawCount;
+        public static Rectangle WindowBounds;
+        
         public MainGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Window.Title = "test lol";
+            Window.AllowUserResizing = true;
         }
 
         protected override void LoadContent()
@@ -40,18 +47,34 @@ namespace ProjectC
 
         }
 
+        protected override void Initialize()
+        {
+            WorldGenerator.instance.GenerateWorld();
+            base.Initialize();
+        }
+
         protected override void Update(GameTime gameTime)
         {
+            if (!IsActive) return;
+            WindowBounds = Window.ClientBounds;
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // step logic
-            foreach (var obj in Dimention.Current.AllLoadedThings(EnumStorables.GameObjects))
+            foreach (var obj in Dimension.Current.GameObjects)
             {
-                var gameObject = (GameObject) obj;
+                var gameObject = obj;
                 gameObject.step();
             }
+            foreach(var tile in Dimension.Current.Tiles)
+            {
 
+                if (tile.NeedsToUpdate)
+                {
+                    tile.Step();
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -60,19 +83,20 @@ namespace ProjectC
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
             // draw logic
-            Camera.startBatch(_spriteBatch);
-            foreach (var obj in Dimention.Current.AllLoadedThings(EnumStorables.Chunks))
+            Camera.StartBatch(_spriteBatch);
+            foreach (var obj in Dimension.Current.Chunks)
             {
-                Chunk.Draw(_spriteBatch, (Chunk)obj);
+                Chunk.Draw(_spriteBatch, obj);
             }
-            foreach (var obj in Dimention.Current.AllLoadedThings(EnumStorables.GameObjects))
+            foreach (var obj in Dimension.Current.GameObjects)
             {
-                Camera.draw(_spriteBatch, (GameObject)obj);
+                Camera.draw(_spriteBatch, obj);
             }
 
-            _spriteBatch.DrawString(Sprites.Font, "test text is testing a testy test.", Player.LocalClient.position + Player.LocalClient.origin, Color.White);
+            _spriteBatch.DrawString(Sprites.Font, Player.LocalClient.ChunkIn.ChunkspacePosition.ToString(), Player.LocalClient.position + new Vector2(0,48), Color.White);
+            DrawCount = 0;
             _spriteBatch.End();
-            
+
             base.Draw(gameTime);
         }
     }

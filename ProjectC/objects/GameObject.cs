@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Json;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ProjectC.view;
 using ProjectC.world;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
@@ -16,7 +18,7 @@ namespace ProjectC.objects
 
         public GameObject()
         {
-            Dimention.LoadGameObject(this);
+            Dimension.LoadGameObject(this);
         }
 
         public virtual void step()
@@ -30,13 +32,13 @@ namespace ProjectC.objects
             {
                 Vector2 newOrigin = origin;
 
-                _spriteBatch.Draw(sprite, position - newOrigin, Color.White);
+                _spriteBatch.Draw(sprite, (position)*Tile.TileSize - newOrigin, Color.White);
             }
         }
 
         public virtual void destroy()
         {
-            Dimention.UnloadGameObject(this);
+            Dimension.UnloadGameObject(this);
         }
 
         public JsonObject Save()

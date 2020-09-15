@@ -81,7 +81,7 @@
       </e>
       <e p="World" t="Include">
         <e p="Chunk.cs" t="Include" />
-        <e p="Dimention.cs" t="Include" />
+        <e p="Dimension.cs" t="Include" />
         <e p="EnumSides.cs" t="Include" />
         <e p="EnumStorables.cs" t="Include" />
         <e p="EnumTiles.cs" t="Include" />

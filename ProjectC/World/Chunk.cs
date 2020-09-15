@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,19 +9,21 @@ namespace ProjectC.world
 {
     public class Chunk : IStorable
     {
-        public const int ChunkWidth = 32;
-        public const int ChunkHeight = 96;
+        public const int ChunkWidth = 16;
+        public const int ChunkHeight = 32;
 
         public Vector2 Position;
+        public Vector2 ChunkspacePosition;
         
-        public Tile[,] Tiles = new Tile[32,96];
+        public Tile[,] Tiles = new Tile[ChunkWidth,ChunkHeight];
 
         public Chunk(Point id, bool dontLoad = false)
         {
-            Position = id.ToVector2() * new Vector2(ChunkWidth, ChunkHeight) * Tile.TileSize;
+            ChunkspacePosition = id.ToVector2();
+            Position = ChunkspacePosition * new Vector2(ChunkWidth, ChunkHeight);
             if (!dontLoad)
             {
-                Dimention.LoadChunk(this);
+                Dimension.LoadChunk(this);
             }
         }
         
@@ -38,17 +41,27 @@ namespace ProjectC.world
 
         public Point WorldToChunk(Vector2 position)
         {
-            return ((position  - Position) / Tile.TileSize).ToPoint();
+            return (position  - Position).ToPoint();
         }
 
         public Vector2 ChunkToWorld(Point position)
         {
-            return position.ToVector2() * Tile.TileSize + Position;
+            return position.ToVector2() + Position;
         }
         
         public void PlaceTile(Tile tile, Point chunkpos)
         {
             Tiles[chunkpos.X,chunkpos.Y] = tile;
+        }
+
+        public void RemoveTile(Point chunkpos)
+        {
+            var tile = Tiles[chunkpos.X, chunkpos.Y];
+            if (tile != null)
+            {
+                Tiles[chunkpos.X, chunkpos.Y] = null;
+                Dimension.UnloadTile(tile);
+            }
         }
 
         public JsonObject Save()
@@ -63,7 +76,15 @@ namespace ProjectC.world
 
         public Tile TileFrom(Point position)
         {
-            return Tiles[position.X, position.Y];
+            try
+            {
+                return Tiles[position.X, position.Y];
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(position.ToString());
+            }
+            return Dimension.VoidTile;
         }
     }
 }
