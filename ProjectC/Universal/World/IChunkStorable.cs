@@ -1,6 +1,6 @@
 ﻿using System.Json;
 
-namespace ProjectC.World
+namespace ProjectC.Universal.World
 {
     public interface IChunkStorable
     {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace ProjectC.Networking.Packets
+namespace ProjectC.Universal.Networking.Packets
 {
     public class BufferWriter
     {

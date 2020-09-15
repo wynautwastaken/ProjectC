@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectC.Client;
+using ProjectC.Client.Engine;
 using ProjectC.Engine.View;
-using ProjectC.Networking.Packets;
-using ProjectC.World;
-using ProjectC.Networking.Server;
-using ProjectC.Objects;
+using ProjectC.Server.Engine;
 using ProjectC.Universal.Networking;
+using ProjectC.Universal.Objects;
+using ProjectC.Universal.World;
 
 namespace ProjectC
 {

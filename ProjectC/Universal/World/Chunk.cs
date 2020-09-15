@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Json;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectC.Engine;
 using ProjectC.Engine.Objects;
-using SharpDX.MediaFoundation;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace ProjectC.World
+namespace ProjectC.Universal.World
 {
     public readonly struct ChunkIdentifier
     {

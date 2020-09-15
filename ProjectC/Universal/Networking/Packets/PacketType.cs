@@ -1,4 +1,4 @@
-﻿namespace ProjectC.Networking.Packets
+﻿namespace ProjectC.Universal.Networking.Packets
 {
     public enum PacketType
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Json;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectC.Engine.View;
-using ProjectC.World;
+using ProjectC.Universal.World;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 

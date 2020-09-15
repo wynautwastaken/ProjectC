@@ -1,8 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Threading;
-using ProjectC.Networking.Packets;
-using ProjectC.Networking.Server;
+using ProjectC.Universal.Networking.Packets;
 
 namespace ProjectC.Server.Engine
 {
@@ -14,25 +14,37 @@ namespace ProjectC.Server.Engine
         public TcpClient ClientSocket;
         public static Thread NettyThread;
         public bool running = true;
+        public int Ping = 0;
 
         public void Run()
         {
             while (running)
             {
-                NetworkStream networkStream = ClientSocket.GetStream();
-                byte[] bytesFrom = new byte[1025];
-                networkStream.Read(bytesFrom, 0, bytesFrom.Length);
-                
-                BufferReader reader = new BufferReader(bytesFrom);
-
-                switch (reader.ReadEnum<PacketType>())
+                try
                 {
-                    case PacketType.Ping:
-                        Console.WriteLine("Ping!");
-                        break;
+                    NetworkStream networkStream = ClientSocket.GetStream();
+                    byte[] bytesFrom = new byte[1025];
+                    networkStream.Read(bytesFrom, 0, bytesFrom.Length);
+                    
+                    BufferReader reader = new BufferReader(bytesFrom);
+
+                    switch (reader.ReadEnum<PacketType>())
+                    {
+                        case PacketType.Ping:
+                            
+                            break;
+                    }
                 }
-                
-                return;
+                catch (IOException e)
+                {
+                    if (e.Message.Contains(
+                        "Unable to read data from the transport connection: A blocking operation was interrupted by a call to WSACancelBlockingCall..")
+                    )
+                    {
+                        // this error doesn't matter
+                        running = false;
+                    }
+                }
             }
         }
 

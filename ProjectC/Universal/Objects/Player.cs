@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectC.Engine;
 using ProjectC.Engine.Objects;
 using ProjectC.Engine.View;
-using ProjectC.World;
+using ProjectC.Universal.World;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace ProjectC.Objects
+namespace ProjectC.Universal.Objects
 {
     public class Player : GameObject
     {
@@ -39,7 +35,7 @@ namespace ProjectC.Objects
             _oldScroll = Mouse.GetState().ScrollWheelValue;
             if (scroll > 0)
             {
-                Camera.zoom *= 0.9f;
+                Camera.Zoom *= 0.9f;
             }
 
             if ((d - a) < 0)
@@ -53,7 +49,7 @@ namespace ProjectC.Objects
 
             if (scroll < 0)
             {
-                Camera.zoom /= 0.9f;
+                Camera.Zoom /= 0.9f;
             }
 
             var click = Mouse.GetState().LeftButton.Equals(ButtonState.Pressed);
@@ -77,7 +73,7 @@ namespace ProjectC.Objects
                 ChunkedWorld.Save();
             }
 
-            Camera.zoom = Math.Clamp(Camera.zoom, 0.5f, 4f);
+            Camera.Zoom = Math.Clamp(Camera.Zoom, 0.5f, 4f);
         }
 
         public override void draw(SpriteBatch _spriteBatch)

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Net;
-using Microsoft.Xna.Framework;
 
-namespace ProjectC.World
+namespace ProjectC.Universal.World
 {
     public class ChunkedWorld
     {

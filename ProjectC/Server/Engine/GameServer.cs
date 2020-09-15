@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using ProjectC.Server.Engine;
+using ProjectC.Server.Engine.Objects;
+using ProjectC.Server.Engine.Ticks;
 
-namespace ProjectC.Networking.Server
+namespace ProjectC.Server.Engine
 {
     /**
      * This Class will run on a different thread and will accept new clients.
@@ -15,16 +17,20 @@ namespace ProjectC.Networking.Server
         private TcpListener ServerSocket;
         public Thread ServerThread;
         public bool Running = true;
+        public ServerNettyTick NettyTick;
 
         public static List<ClientConnection> clientList = new List<ClientConnection>();
 
         private void Run()
         {
+            // start ticks
+            NettyTick = new ServerNettyTick();
+            new PingClients();
+
             while (Running)
             {
                 try
                 {
-                    Console.WriteLine("Ready for Connection");
                     TcpClient clientSocket = ServerSocket.AcceptTcpClient(); // accept connection
                     new ClientConnection(clientSocket);
                 }
@@ -42,6 +48,7 @@ namespace ProjectC.Networking.Server
         {
             ServerSocket.Stop();
             Running = false;
+            NettyTick.Running = false;
 
             foreach (ClientConnection client in clientList)
             {

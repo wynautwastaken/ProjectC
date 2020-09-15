@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading;
-using ProjectC.Engine;
-using ProjectC.Networking.Packets;
+using ProjectC.Universal.Networking.Packets;
 
-namespace ProjectC.Client
+namespace ProjectC.Client.Engine
 {
     public class GameClient
     {
@@ -26,14 +25,38 @@ namespace ProjectC.Client
         {
             while (ClientSocket.Connected)
             {
-                BufferWriter buffer = new BufferWriter(1);
-                buffer.WriteEnum(PacketType.Ping);
+                try
+                {
+                    NetworkStream networkStream = ClientSocket.GetStream();
+                    byte[] bytesFrom = new byte[1025];
+                    networkStream.Read(bytesFrom, 0, bytesFrom.Length);
 
-                byte[] bytes = buffer.Buffer;
+                    BufferReader reader = new BufferReader(bytesFrom);
 
-                Stream.Write(bytes,0,bytes.Length);
-                Disconnect();
+                    switch (reader.ReadEnum<PacketType>())
+                    {
+                        case PacketType.Ping:
+                            //Console.WriteLine("Client Ping");
+                            BufferWriter writer = new BufferWriter(1);
+                            writer.WriteEnum(PacketType.Ping);
+                            SendBuffer(writer);
+                            break;
+                    }
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine("Client Disconnecting");
+                    Disconnect();
+                }
             }
+        }
+
+        public void SendBuffer(BufferWriter buffer)
+        {
+            //Console.WriteLine("Sending Buffer");
+            NetworkStream stream = ClientSocket.GetStream();
+            stream.Write(buffer.Buffer);
+            stream.Flush();
         }
 
         public void Disconnect()
