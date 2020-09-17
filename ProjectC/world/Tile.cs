@@ -24,6 +24,8 @@ namespace ProjectC.world
         public bool NeedsToUpdate;
         public EnumTiles UpdateType;
 
+        public int StepCount;
+        public int StepAmount = 8;
 
         public void UpdateRenderedSide()
         {
@@ -67,7 +69,7 @@ namespace ProjectC.world
                     if (Camera.OnScreen(tile.Position))
                     {
                         batch.Draw(tile._sheet, tile.Position * TileSize,
-                            new Rectangle(new Point(((int)tile.Side % 4) * 8, ((int)tile.Side / 4) * 8), new Point(8, 8)),
+                            new Rectangle(new Point(((int)tile.Side % 4) * 8, ((int)tile.Side / 4) * 8), (Vector2.One * 8).ToPoint()),
                             tile.Tint);
                         MainGame.DrawCount++;
                     }
@@ -82,37 +84,53 @@ namespace ProjectC.world
             Position = chunk.ChunkToWorld(position);
             chunk.PlaceTile(this, position);
             Dimension.LoadTile(this);
+            StepCount = StepAmount;
+            UpdateTile(true);
             NeedsToUpdate = true;
         }
 
         public void Step()
         {
-            if (!NeedsToUpdate) return;
-            UpdateTileRendering();
+            if (StepCount >= StepAmount)
+            {
+                if (Camera.OnScreen(Position)) {
+                    UpdateTile(true);
+                    StepCount = 0;
+                }
+            }
         }
 
-        public void UpdateTileRendering()
+        public void UpdateTile(bool manual)
         {
+            UpdateTileRendering(manual);
+        }
+
+        public void UpdateTileRendering(bool manual)
+        {
+            if (!NeedsToUpdate && !manual) return;
             NeedsToUpdate = false;
             TileType = UpdateType;
             UpdateSprite(TileType);
             UpdateRenderedSide();
-            UpdateNearbyTiles(Position, this);
+            if(manual)
+            {
+                UpdateNearbyTiles(Position);
+            }
         }
 
-        public static void UpdateNearbyTiles(Vector2 worldPos, Tile starter)
+        public static void UpdateNearbyTiles(Vector2 worldPos)
         {
             var tileLeft = Dimension.Current.TileAtWorldPos(worldPos - Vector2.UnitX, false);
-            if (TileExists(tileLeft) && tileLeft != starter && tileLeft.NeedsToUpdate) tileLeft.UpdateTileRendering();
+            if (TileExists(tileLeft)) tileLeft.UpdateTileRendering(false);
 
             var tileRight = Dimension.Current.TileAtWorldPos(worldPos + Vector2.UnitX, false);
-            if (TileExists(tileRight) && tileRight != starter && tileRight.NeedsToUpdate) tileRight.UpdateTileRendering();
+            if (TileExists(tileRight)) tileRight.UpdateTileRendering(false);
 
             var tileUp = Dimension.Current.TileAtWorldPos(worldPos - Vector2.UnitY, false);
-            if (TileExists(tileUp) && tileUp != starter && tileUp.NeedsToUpdate) tileUp.UpdateTileRendering();
+            if (TileExists(tileUp)) tileUp.UpdateTileRendering(false);
             
             var tileDown = Dimension.Current.TileAtWorldPos(worldPos + Vector2.UnitY, false);
-            if (TileExists(tileDown) && tileDown != starter && tileDown.NeedsToUpdate) tileDown.UpdateTileRendering();
+            if (TileExists(tileDown)) tileDown.UpdateTileRendering(false);
         }
 
         public void UpdateSprite(EnumTiles type)
@@ -120,6 +138,7 @@ namespace ProjectC.world
             _sheet = type switch
             {
                 EnumTiles.Grass => Sprites.TileDirtGrass,
+                EnumTiles.Dirt => Sprites.TileDirt,
                 EnumTiles.Stone => Sprites.TileStone,
                 _ => Sprites.TileFresh,
             };

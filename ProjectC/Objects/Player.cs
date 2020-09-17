@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Input;
 using ProjectC.world;
 using ProjectC.view;
 using SharpDX.MediaFoundation;
+using Microsoft.Win32.SafeHandles;
+using SharpDX.DirectWrite;
+using System.CodeDom;
 
 namespace ProjectC.objects
 {
@@ -16,6 +19,8 @@ namespace ProjectC.objects
         public static Player LocalClient = new Player();
 
         public Vector2 CamOffset = Vector2.One * 0.5f;
+        public float CollisionIncrement = 64;
+        private float inc { get => CollisionIncrement; }
 
         public float WalkSpeed
         {
@@ -27,8 +32,9 @@ namespace ProjectC.objects
             get => _fallSpeed / Tile.TileSize;
             set => _fallSpeed = value;
         }
+        public float MaxYSpd = 8;
 
-        private float _fallSpeed = 1;
+        private float _fallSpeed = 0.2f;
         private float _walkSpeed = 2;
 
         public Dimension CurrentDimension = Dimension.Current;
@@ -38,9 +44,9 @@ namespace ProjectC.objects
 
         public Player()
         {
-            position = new Vector2(512 * Chunk.ChunkWidth,2 * Chunk.ChunkHeight);
+            position = new Vector2(512.5f * Chunk.ChunkWidth,1.5f * Chunk.ChunkHeight);
             LocalClient = this;
-            origin = new Vector2(12,24);
+            origin = new Vector2(8,24);
         }
         
         private int _oldScroll;
@@ -51,11 +57,96 @@ namespace ProjectC.objects
             return value1 + d;
         }
         
+        public bool Collides(Vector2 pos)
+        {
+            var hitTile = Dimension.Current.TileAtWorldPos(pos, true);
+            var hasHit = Tile.TileExists(hitTile);
+            return hasHit;
+        }
+
+        public void Collide()
+        {
+            var i = 0;
+            if (Collides(position + Velocity.X * Vector2.UnitX))
+            {
+                var ppos = position;
+                while (Collides((position + Velocity.X * Vector2.UnitX) - (i/inc)*Vector2.UnitY) && i < inc)
+                {
+                    position -= Vector2.UnitY/inc;
+                    i++;
+                }
+                if(i >= inc)
+                {
+                    position = ppos;
+                }
+                CollideHorizontally();
+                return;
+            }
+
+            if (Collides(position + Velocity.Y * Vector2.UnitY))
+            {
+                i = 0;
+                while (Collides(position) && i < inc)
+                {
+                    position -= Vector2.UnitY;
+                    if (!Collides(position)) return;
+                    i++;
+                }
+                i = 0;
+                while (!Collides(position + Vector2.Normalize(Velocity.Y * Vector2.UnitY) / inc) && i < inc)
+                {
+                    position += Vector2.Normalize(Velocity.Y * Vector2.UnitY) / inc;
+                    i++;
+                }
+                Velocity.Y = 0;
+            }
+            else if (Collides(position + Vector2.UnitY * 2) && !Collides(position + Vector2.UnitY))
+            {
+                position += Vector2.UnitY;
+            }
+            CollideHorizontally();
+        }
+        private void CollideHorizontally()
+        {
+            if (Collides(position + Velocity.X * Vector2.UnitX))
+            {
+                var i = 0;
+                while (!Collides(position + Vector2.Normalize(Velocity.X * Vector2.UnitX) / inc) && i < inc)
+                {
+                    position += Vector2.Normalize(Velocity.X * Vector2.UnitX) / inc;
+                    i++;
+                }
+                Velocity.X = 0;
+            }
+        }
+
+        public void LoadNearbyChunks()
+        {
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitY - Vector2.UnitX * 2).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitY - Vector2.UnitX).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitY).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitY + Vector2.UnitX).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitY + Vector2.UnitX * 2).ToPoint(), true);
+
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitX * 2).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition - Vector2.UnitX).ToPoint(), true);
+            //already loaded middle chunk
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitX).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitX * 2).ToPoint(), true);
+
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitY - Vector2.UnitX * 2).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitY - Vector2.UnitX).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitY).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitY + Vector2.UnitX).ToPoint(), true);
+            Dimension.Current.LoadChunk((ChunkIn.ChunkspacePosition + Vector2.UnitY + Vector2.UnitX * 2).ToPoint(), true);
+        }
+
         public override void step()
         {
             position = Vector2.Max(position, Vector2.Zero);
             ChunkIn = Dimension.Current.ChunkAtWorldPos(position, true);
             ChunkPos = ChunkIn.WorldToChunk(position);
+            LoadNearbyChunks();
             
             sprite = Sprites.PlayerHuman;
 
@@ -63,11 +154,17 @@ namespace ProjectC.objects
             var mouseState = Mouse.GetState();
             var a = keyState.IsKeyDown(Keys.A) ? 1 : 0;
             var d = keyState.IsKeyDown(Keys.D) ? 1 : 0;
-            var collidingTile = Dimension.Current.TileAtWorldPos(position + Vector2.UnitY, true);
-            var onGround = Tile.TileExists(collidingTile);
+            var floorTile = Dimension.Current.TileAtWorldPos(position + Vector2.UnitY, true);
+            var onGround = Tile.TileExists(floorTile);
+            if(onGround && position.Y != Math.Round(position.Y))
+            {
+                position.Y -= (position.Y - (float)Math.Floor(position.Y));
+            }
             Velocity += new Vector2((d - a) * WalkSpeed, onGround ? 0 : FallSpeed);
-            Velocity.Y = Math.Clamp(Velocity.Y, -FallSpeed, FallSpeed);
-            Velocity.X = Lerp(Math.Clamp(Velocity.X, -WalkSpeed * 2, WalkSpeed * 2),0,0.25f);
+            Velocity.Y = Math.Clamp(Velocity.Y, -MaxYSpd, onGround ? 0 : MaxYSpd);
+            Velocity.X = Lerp(Math.Clamp(Velocity.X, -WalkSpeed * 2, WalkSpeed * 2), 0, 0.25f);
+
+            Collide();
 
             position += Velocity;
             
@@ -110,7 +207,7 @@ namespace ProjectC.objects
                 CurrentDimension.Save();
             }
 
-            Camera.zoom = Math.Clamp(Camera.zoom, 0.5f, 4f);
+            Camera.zoom = Math.Clamp(Camera.zoom, 0.8f, 4f);
         }
 
         public bool TryPlaceTile(Vector2 worldPos, EnumTiles type)

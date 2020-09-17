@@ -16,7 +16,8 @@ namespace ProjectC.world
         private readonly List<Tile> _tiles = new List<Tile>();
         private Dictionary<Point,Chunk> ChunkDict = new Dictionary<Point, Chunk>();
         public static Chunk VoidChunk = new Chunk(Point.Zero, true);
-        public static Tile VoidTile = new Tile(EnumTiles.Fresh, VoidChunk, Point.Zero);
+        public static Tile VoidTile = new Tile(EnumTiles.Stone, VoidChunk, Point.Zero);
+        public static int Seed = 2;
 
         public IReadOnlyList<Chunk> Chunks => _chunks;
         public IReadOnlyList<GameObject> GameObjects => _gameobjects;

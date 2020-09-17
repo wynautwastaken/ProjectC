@@ -1,5 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/chunk.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/chunk.xnb","TextureProcessor","Texture2DContent",183,12373,0.521
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/dirt.xnb","TextureProcessor","Texture2DContent",299,4181,0.843
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/dirt_grassy.xnb","TextureProcessor","Texture2DContent",388,4181,0.173
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/fresh_tile.xnb","TextureProcessor","Texture2DContent",193,4181,0.002
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/Windows/Content/player_hmn.xnb","TextureProcessor","Texture2DContent",670,2133,0.001

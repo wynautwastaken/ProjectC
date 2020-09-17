@@ -42,3 +42,4 @@ C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\
 C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\System.Json.dll
 C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\SpriteFontPlus.dll
 C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\chunk.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\dirt.xnb

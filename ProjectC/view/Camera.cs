@@ -24,7 +24,6 @@ namespace ProjectC.view
 
             var bounds = MainGame._graphics.GraphicsDevice.Viewport.Bounds;
             CamBounds = bounds;
-
             CameraMatrix = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
                            Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
                            Matrix.CreateTranslation(new Vector3(bounds.Width / 2f, bounds.Height / 2f, 0));
@@ -34,7 +33,8 @@ namespace ProjectC.view
 
         public static bool OnScreen(Vector2 pos)
         {
-            return Vector2.Distance(Player.LocalClient.position,pos) < CamBounds.Width * 1.5f;
+            var dist = Vector2.Distance(Player.LocalClient.position, pos);
+            return dist < (96 / (zoom*1.5));
         }
 
         public static void draw(SpriteBatch _spriteBatch, GameObject gameObject)

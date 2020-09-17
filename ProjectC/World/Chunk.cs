@@ -59,6 +59,7 @@ namespace ProjectC.world
             var tile = Tiles[chunkpos.X, chunkpos.Y];
             if (tile != null)
             {
+                tile.UpdateTileRendering(true);
                 Tiles[chunkpos.X, chunkpos.Y] = null;
                 Dimension.UnloadTile(tile);
             }
@@ -76,6 +77,8 @@ namespace ProjectC.world
 
         public Tile TileFrom(Point position)
         {
+            if (position.X < 0 || position.Y < 0 || position.X >= ChunkWidth || position.Y >= ChunkHeight)
+                return Dimension.VoidTile;
             try
             {
                 return Tiles[position.X, position.Y];
@@ -83,8 +86,8 @@ namespace ProjectC.world
             catch(Exception e)
             {
                 Debug.WriteLine(position.ToString());
+                return Dimension.VoidTile;
             }
-            return Dimension.VoidTile;
         }
     }
 }

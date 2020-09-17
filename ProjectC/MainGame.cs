@@ -37,6 +37,7 @@ namespace ProjectC
 
             Sprites.Square = this.Content.Load<Texture2D>("square");
             Sprites.TileDirtGrass = this.Content.Load<Texture2D>("dirt_grassy");
+            Sprites.TileDirt = this.Content.Load<Texture2D>("dirt");
             Sprites.TileStone = this.Content.Load<Texture2D>("stone");
             Sprites.TileFresh = this.Content.Load<Texture2D>("fresh_tile");
             Sprites.PlayerHuman = this.Content.Load<Texture2D>("player_hmn");
@@ -69,10 +70,10 @@ namespace ProjectC
             }
             foreach(var tile in Dimension.Current.Tiles)
             {
-
-                if (tile.NeedsToUpdate)
+                if (tile != null)
                 {
                     tile.Step();
+                    tile.StepCount++;
                 }
             }
             base.Update(gameTime);
