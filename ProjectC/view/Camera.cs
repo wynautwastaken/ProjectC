@@ -31,6 +31,11 @@ namespace ProjectC.view
             _spriteBatch.Begin(SpriteSortMode.Deferred,samplerState: SamplerState.PointClamp, transformMatrix: CameraMatrix);
         }
 
+        public static void DrawBackground(SpriteBatch batch)
+        {
+            batch.Draw(Sprites.SkyBg, new Rectangle(Position.ToPoint(), CamBounds.Size), null, Color.White, 0, CamBounds.Center.ToVector2(), SpriteEffects.None, 0);
+        }
+
         public static bool OnScreen(Vector2 pos)
         {
             var dist = Vector2.Distance(Player.LocalClient.position, pos);

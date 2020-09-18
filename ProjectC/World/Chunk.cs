@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectC.view;
+using Point = Microsoft.Xna.Framework.Point;
 
 namespace ProjectC.world
 {
@@ -14,8 +16,14 @@ namespace ProjectC.world
 
         public Vector2 Position;
         public Vector2 ChunkspacePosition;
-        
-        public Tile[,] Tiles = new Tile[ChunkWidth,ChunkHeight];
+
+        public const int ChunkTData = 0;
+        public const int ChunkTSide = 1;
+        public const int ChunkTColor = 2;
+        public const int ChunkTMeta = 3;
+        public const int TileDepth = 4;
+
+        public int[,,] Tiles = new int[ChunkWidth,ChunkHeight,TileDepth];
 
         public Chunk(Point id, bool dontLoad = false)
         {
@@ -26,15 +34,25 @@ namespace ProjectC.world
                 Dimension.LoadChunk(this);
             }
         }
-        
+
         public static void Draw(SpriteBatch batch, Chunk chunk)
         {
             //batch.Draw(Sprites.Rectangle,new Rectangle(chunk.Position.ToPoint(),new Point(32*8,96*8)), Color.White);
-            foreach (var tile in chunk.Tiles)
+            for (var x = 0; x < ChunkWidth; x++)
             {
-                if (tile != null)
+                for (var y = 0; y < ChunkHeight; y++)
                 {
-                    Tile.Draw(batch, tile);
+                    TileHelper.Draw(batch, chunk, x, y);
+                }
+            }
+        }
+        public static void Step(Chunk chunk)
+        {
+            for (var x = 0; x < ChunkWidth; x++)
+            {
+                for (var y = 0; y < ChunkHeight; y++)
+                {
+                    TileHelper.Step(chunk, x, y);
                 }
             }
         }
@@ -49,20 +67,31 @@ namespace ProjectC.world
             return position.ToVector2() + Position;
         }
         
-        public void PlaceTile(Tile tile, Point chunkpos)
+        public static bool PointValid(Point point)
         {
-            Tiles[chunkpos.X,chunkpos.Y] = tile;
+            return point.X < Chunk.ChunkWidth && point.X >= 0 && point.Y < Chunk.ChunkHeight && point.Y >= 0;
+        }
+
+        public void PlaceTile(int data, int side, int color, int meta, Point chunkpos)
+        {
+            if (!PointValid(chunkpos)) return;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTData] = data;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTSide] = side;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTColor] = color;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTMeta] = meta;
         }
 
         public void RemoveTile(Point chunkpos)
         {
-            var tile = Tiles[chunkpos.X, chunkpos.Y];
-            if (tile != null)
-            {
-                tile.UpdateTileRendering(true);
-                Tiles[chunkpos.X, chunkpos.Y] = null;
-                Dimension.UnloadTile(tile);
-            }
+            if (!PointValid(chunkpos)) return;
+            var data = Tiles[chunkpos.X, chunkpos.Y, ChunkTData];
+            if (data == 0) return;
+            
+            TileHelper.UpdateNearbyTiles(ChunkToWorld(chunkpos));
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTData] = 0;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTSide] = 0;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTColor] = 0;
+            Tiles[chunkpos.X, chunkpos.Y, ChunkTMeta] = 0;
         }
 
         public JsonObject Save()
@@ -75,18 +104,18 @@ namespace ProjectC.world
             throw new System.NotImplementedException();
         }
 
-        public Tile TileFrom(Point position)
+        public int TileFrom(Point position, int type)
         {
             if (position.X < 0 || position.Y < 0 || position.X >= ChunkWidth || position.Y >= ChunkHeight)
-                return Dimension.VoidTile;
+                return 0;
             try
             {
-                return Tiles[position.X, position.Y];
+                return Tiles[position.X, position.Y,type];
             }
             catch(Exception e)
             {
                 Debug.WriteLine(position.ToString());
-                return Dimension.VoidTile;
+                return 0;
             }
         }
     }

@@ -13,15 +13,12 @@ namespace ProjectC.world
         public static Dimension Current = new Dimension();
         private readonly List<Chunk> _chunks = new List<Chunk>();
         private readonly List<GameObject> _gameobjects = new List<GameObject>();
-        private readonly List<Tile> _tiles = new List<Tile>();
         private Dictionary<Point,Chunk> ChunkDict = new Dictionary<Point, Chunk>();
         public static Chunk VoidChunk = new Chunk(Point.Zero, true);
-        public static Tile VoidTile = new Tile(EnumTiles.Stone, VoidChunk, Point.Zero);
-        public static int Seed = 2;
+        public static int Seed = 694201337;
 
         public IReadOnlyList<Chunk> Chunks => _chunks;
         public IReadOnlyList<GameObject> GameObjects => _gameobjects;
-        public IReadOnlyList<Tile> Tiles => _tiles;
 
         public JsonObject Save()
         {
@@ -42,19 +39,19 @@ namespace ProjectC.world
             return LoadChunk(new Vector2(position.X / Chunk.ChunkWidth, position.Y /  Chunk.ChunkHeight).ToPoint(), generate);
         }
 
-        public Tile TileAtWorldPos(Vector2 position, bool generate)
+        public int TileAtWorldPos(Vector2 position, int type, bool generate)
         {
             if (position.X < 0 || position.Y < 0)
             {
-                return VoidTile;
+                return 0;
             }
             if (!generate && !Current.IsChunkLoaded(new Vector2(position.X / Chunk.ChunkWidth, position.Y / Chunk.ChunkHeight).ToPoint()))
             {
-                return VoidTile;
+                return 0;
             }
             var chunk = ChunkAtWorldPos(position, generate);
             var cpos = chunk.WorldToChunk(position);
-            return chunk.TileFrom(cpos);
+            return chunk.TileFrom(cpos, type);
         }
 
         public bool IsChunkLoaded(Point chunkpos)
@@ -69,13 +66,15 @@ namespace ProjectC.world
                 return VoidChunk;
             }
             if (ChunkDict.TryGetValue(chunkpos, out var chunk)) return chunk;
-            var chonk = new Chunk(chunkpos);
             if (generate)
             {
-                WorldGenerator.GenerateChunk(DimensionWorldType, chonk);
+                var chonk = new Chunk(chunkpos);
+            
+                WorldGenerator.GenerateChunk(DimensionWorldType, chonk); 
+                if (ChunkDict.TryAdd(chunkpos, chonk)) return chonk;
+                UnloadChunk(chonk);
+                return VoidChunk;
             }
-            if (ChunkDict.TryAdd(chunkpos, chonk)) return chonk;
-            UnloadChunk(chonk);
             return VoidChunk;
         }
 
@@ -87,10 +86,6 @@ namespace ProjectC.world
         public static void UnloadChunk(Chunk  chunk)
         {
             Current._chunks.Remove(chunk);
-            foreach (var tile in chunk.Tiles)
-            {
-                UnloadTile(tile);
-            }
         }
         
         public static void UnloadGameObject(GameObject obj)
@@ -102,16 +97,5 @@ namespace ProjectC.world
         {
             Current._gameobjects.Add(obj);
         }
-        
-        public static void LoadTile(Tile tile)
-        {
-            Current._tiles.Add(tile);
-        }
-        
-        public static void UnloadTile(Tile tile)
-        {
-            Current._tiles.Remove(tile);
-        }
-
     }
 }

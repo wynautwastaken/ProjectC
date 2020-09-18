@@ -37,12 +37,8 @@ namespace ProjectC.world
                     var worm = chunk.Position + pos.ToVector2();
                     if (!WormHasBeen(worm.X, worm.Y))
                     {
-                        if (Tile.TryMakeTile(EnumTiles.Fresh, chunk, pos, out var tile))
-                        {
-                            Tile.UpdateSpriteLater(tile, TileTypeFromWorldNoise(n,worm.X,worm.Y));
-                        }
+                        TileHelper.TryMakeTile((int)TileTypeFromWorldNoise(n, worm.X, worm.Y), 0, Color.White, 0, chunk, pos);
                     }
-                    else chunk.Tiles[i, j] = new Tile(EnumTiles.Air, chunk, pos);
                 }
             }
         }

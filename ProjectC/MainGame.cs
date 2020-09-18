@@ -41,7 +41,10 @@ namespace ProjectC
             Sprites.TileStone = this.Content.Load<Texture2D>("stone");
             Sprites.TileFresh = this.Content.Load<Texture2D>("fresh_tile");
             Sprites.PlayerHuman = this.Content.Load<Texture2D>("player_hmn");
-            Sprites.Rectangle = this.Content.Load<Texture2D>("chunk");
+            Sprites.SkyBg = this.Content.Load<Texture2D>("sky_bg");
+            Sprites.CloudBg = this.Content.Load<Texture2D>("clouds");
+            Sprites.Sun = this.Content.Load<Texture2D>("sun");
+
             var font = File.ReadAllBytes(this.Content.RootDirectory + "/font.ttf");
             var res = TtfFontBaker.Bake(font,32,512,512,new CharacterRange[] {new CharacterRange(' ','~') });
             Sprites.Font = res.CreateSpriteFont(GraphicsDevice);
@@ -68,12 +71,11 @@ namespace ProjectC
                 var gameObject = obj;
                 gameObject.step();
             }
-            foreach(var tile in Dimension.Current.Tiles)
+            foreach(var chunk in Dimension.Current.Chunks)
             {
-                if (tile != null)
+                if (chunk != null)
                 {
-                    tile.Step();
-                    tile.StepCount++;
+                    Chunk.Step(chunk);
                 }
             }
             base.Update(gameTime);
@@ -82,9 +84,12 @@ namespace ProjectC
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             // draw logic
             Camera.StartBatch(_spriteBatch);
+
+            Camera.DrawBackground(_spriteBatch);
+            
             foreach (var obj in Dimension.Current.Chunks)
             {
                 Chunk.Draw(_spriteBatch, obj);

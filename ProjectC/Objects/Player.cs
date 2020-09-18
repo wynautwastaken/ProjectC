@@ -1,15 +1,9 @@
 ﻿using System;
-using System.CodeDom.Compiler;
-using System.Net.Http.Headers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectC.world;
 using ProjectC.view;
-using SharpDX.MediaFoundation;
-using Microsoft.Win32.SafeHandles;
-using SharpDX.DirectWrite;
-using System.CodeDom;
 
 namespace ProjectC.objects
 {
@@ -24,12 +18,12 @@ namespace ProjectC.objects
 
         public float WalkSpeed
         {
-            get => _walkSpeed / Tile.TileSize;
+            get => _walkSpeed / TileHelper.TileSize;
             set => _walkSpeed = value;
         }
         public float FallSpeed
         {
-            get => _fallSpeed / Tile.TileSize;
+            get => _fallSpeed / TileHelper.TileSize;
             set => _fallSpeed = value;
         }
         public float MaxYSpd = 8;
@@ -59,39 +53,40 @@ namespace ProjectC.objects
         
         public bool Collides(Vector2 pos)
         {
-            var hitTile = Dimension.Current.TileAtWorldPos(pos, true);
-            var hasHit = Tile.TileExists(hitTile);
+            var hitTile = Dimension.Current.TileAtWorldPos(pos, Chunk.ChunkTData, true);
+            var hasHit = hitTile > 0;
             return hasHit;
         }
 
         public void Collide()
         {
             var i = 0;
+            while (Collides(position) && i < inc)
+            {
+                position -= Vector2.UnitY / inc;
+                if (!Collides(position)) return;
+                i++;
+            }
             if (Collides(position + Velocity.X * Vector2.UnitX))
             {
                 var ppos = position;
-                while (Collides((position + Velocity.X * Vector2.UnitX) - (i/inc)*Vector2.UnitY) && i < inc)
+                while (Collides(ppos + Velocity.X * Vector2.UnitX))
                 {
-                    position -= Vector2.UnitY/inc;
+                    ppos -= Vector2.UnitY/inc;
                     i++;
+                    if(i > inc)
+                    {
+                        ppos = position; 
+                        break;
+                    }
                 }
-                if(i >= inc)
-                {
-                    position = ppos;
-                }
+                position = ppos;
                 CollideHorizontally();
                 return;
             }
 
             if (Collides(position + Velocity.Y * Vector2.UnitY))
             {
-                i = 0;
-                while (Collides(position) && i < inc)
-                {
-                    position -= Vector2.UnitY;
-                    if (!Collides(position)) return;
-                    i++;
-                }
                 i = 0;
                 while (!Collides(position + Vector2.Normalize(Velocity.Y * Vector2.UnitY) / inc) && i < inc)
                 {
@@ -154,8 +149,7 @@ namespace ProjectC.objects
             var mouseState = Mouse.GetState();
             var a = keyState.IsKeyDown(Keys.A) ? 1 : 0;
             var d = keyState.IsKeyDown(Keys.D) ? 1 : 0;
-            var floorTile = Dimension.Current.TileAtWorldPos(position + Vector2.UnitY, true);
-            var onGround = Tile.TileExists(floorTile);
+            var onGround = Collides(position + Vector2.UnitY);
             if(onGround && position.Y != Math.Round(position.Y))
             {
                 position.Y -= (position.Y - (float)Math.Floor(position.Y));
@@ -189,7 +183,7 @@ namespace ProjectC.objects
                 Camera.zoom /= 0.9f;
             }
 
-            Camera.Position = position * Tile.TileSize;
+            Camera.Position = position * TileHelper.TileSize;
             var (x, y) = new Point((int)position.X /  Chunk.ChunkWidth, (int)position.Y / Chunk.ChunkHeight);
             var click = mouseState.LeftButton == ButtonState.Pressed;
             if (click)
@@ -212,21 +206,21 @@ namespace ProjectC.objects
 
         public bool TryPlaceTile(Vector2 worldPos, EnumTiles type)
         {
-            var playerpos = position * Tile.TileSize;
+            var playerpos = position * TileHelper.TileSize;
             var clampedpos = Vector2.Transform(worldPos, Matrix.Invert(Camera.CameraMatrix));
             clampedpos -= playerpos;
             var len = Math.Clamp(clampedpos.Length(), 8, 96);
             clampedpos.Normalize();
             clampedpos *= len;
             var npos = playerpos + clampedpos;
-            npos /= Tile.TileSize;
+            npos /= TileHelper.TileSize;
             npos = Vector2.Round(npos);
             var placed = false;
             if (npos.X >= 0 && npos.Y >= 0)
             {
                 var chunk = CurrentDimension.ChunkAtWorldPos(npos, true);
                 var chunkpos = chunk.WorldToChunk(npos);
-                placed = Tile.TryMakeTile(type, chunk, chunkpos, out var tile);
+                placed = TileHelper.TryMakeTile((int)type, 0, Color.White, 0, chunk, chunkpos);
             }
             return placed;
         }
@@ -236,7 +230,7 @@ namespace ProjectC.objects
             if (sprite != null)
             {
                 var facingflip = FacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-                _spriteBatch.Draw(sprite, position*Tile.TileSize, null, Color.White, 0, origin, Vector2.One, facingflip, 0);
+                _spriteBatch.Draw(sprite, position*TileHelper.TileSize, null, Color.White, 0, origin, Vector2.One, facingflip, 0);
             }
         }
     }

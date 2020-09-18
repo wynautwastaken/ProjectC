@@ -1,8 +1,15 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/chunk.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/chunk.xnb","TextureProcessor","Texture2DContent",183,12373,0.148
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/clouds.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/clouds.xnb","TextureProcessor","Texture2DContent",769,40021,0.139
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/dirt.xnb","TextureProcessor","Texture2DContent",299,4181,0.002
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/dirt_grassy.xnb","TextureProcessor","Texture2DContent",388,4181,0.003
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/fresh_tile.xnb","TextureProcessor","Texture2DContent",193,4181,0.001
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_closemountains.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/plains_bg_closemountains.xnb","TextureProcessor","Texture2DContent",1008,174165,0.008
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_forest.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/plains_bg_forest.xnb","TextureProcessor","Texture2DContent",4522,348245,0.107
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_mountains.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/plains_bg_mountains.xnb","TextureProcessor","Texture2DContent",4643,348245,0.01
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_trees.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/plains_bg_trees.xnb","TextureProcessor","Texture2DContent",4886,348245,0.011
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/player_hmn.xnb","TextureProcessor","Texture2DContent",670,2133,0.003
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sky_bg.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/sky_bg.xnb","TextureProcessor","Texture2DContent",222,384085,0.041
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/stone.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/stone.xnb","TextureProcessor","Texture2DContent",312,4181,0.004
+"C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sun.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/sun.xnb","TextureProcessor","Texture2DContent",1804,8185,0.004
 "C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png","C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bin/square.xnb","TextureProcessor","Texture2DContent",86,1109,0.002

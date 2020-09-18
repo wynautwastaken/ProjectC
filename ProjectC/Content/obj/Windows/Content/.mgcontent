@@ -5,14 +5,28 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/chunk.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/clouds.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_closemountains.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_forest.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_mountains.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_trees.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sky_bg.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/stone.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sun.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

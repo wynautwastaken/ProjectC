@@ -1,6 +1,17 @@
-﻿namespace ProjectC.world
+﻿using System;
+
+namespace ProjectC.world
 {
     public enum EnumSides
+    {
+        None,
+        Left,
+        Right,
+        Top,
+        Bottom,
+    }
+
+    public enum EnumDrawSides
     {
         None,
         TopLeft,

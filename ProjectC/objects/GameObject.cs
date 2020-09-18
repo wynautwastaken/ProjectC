@@ -32,7 +32,7 @@ namespace ProjectC.objects
             {
                 Vector2 newOrigin = origin;
 
-                _spriteBatch.Draw(sprite, (position)*Tile.TileSize - newOrigin, Color.White);
+                _spriteBatch.Draw(sprite, (position)*TileHelper.TileSize - newOrigin, Color.White);
             }
         }
 

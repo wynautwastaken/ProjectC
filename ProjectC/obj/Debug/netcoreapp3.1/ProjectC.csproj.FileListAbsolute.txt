@@ -43,3 +43,10 @@ C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\System.J
 C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\SpriteFontPlus.dll
 C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\chunk.xnb
 C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\dirt.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\clouds.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\plains_bg_closemountains.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\plains_bg_forest.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\plains_bg_mountains.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\plains_bg_trees.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\sky_bg.xnb
+C:\Users\Cal\Documents\GitHub\ProjectC\ProjectC\bin\Debug\netcoreapp3.1\Content\sun.xnb
