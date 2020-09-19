@@ -15,6 +15,7 @@ namespace ProjectC.objects
         public Texture2D sprite;
         public Vector2 origin = new Vector2(0,0); // from bottom left so y should be negitive
         public Vector2 position = new Vector2(255,128);
+        public Vector2 WorldPosition { get => position * TileHelper.TileSize; set => position = value; }
 
         public GameObject()
         {
@@ -30,9 +31,7 @@ namespace ProjectC.objects
         {
             if (sprite != null)
             {
-                Vector2 newOrigin = origin;
-
-                _spriteBatch.Draw(sprite, (position)*TileHelper.TileSize - newOrigin, Color.White);
+                _spriteBatch.Draw(sprite, WorldPosition - origin, Color.White);
             }
         }
 

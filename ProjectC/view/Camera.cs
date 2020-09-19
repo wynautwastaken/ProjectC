@@ -33,18 +33,13 @@ namespace ProjectC.view
 
         public static void DrawBackground(SpriteBatch batch)
         {
-            batch.Draw(Sprites.SkyBg, new Rectangle(Position.ToPoint(), CamBounds.Size), null, Color.White, 0, CamBounds.Center.ToVector2(), SpriteEffects.None, 0);
+            batch.Draw(Sprites.SkyBg, new Rectangle(Position.ToPoint(), (CamBounds.Size.ToVector2()/zoom).ToPoint()), null, Color.White, 0, CamBounds.Center.ToVector2(), SpriteEffects.None, 0);
         }
 
         public static bool OnScreen(Vector2 pos)
         {
             var dist = Vector2.Distance(Player.LocalClient.position, pos);
             return dist < (96 / (zoom*1.5));
-        }
-
-        public static void draw(SpriteBatch _spriteBatch, GameObject gameObject)
-        {
-            gameObject.draw(_spriteBatch);
         }
     }
 }

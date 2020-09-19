@@ -4,13 +4,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectC.world;
 using ProjectC.view;
+using System.Windows.Forms;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 
 namespace ProjectC.objects
 {
     public class Player : Entity
     {
         public bool FacingRight = true;
-        public static Player LocalClient = new Player();
+        public static Player LocalClient;
 
         public Vector2 CamOffset = Vector2.One * 0.5f;
         public float CollisionIncrement = 64;
@@ -26,21 +29,32 @@ namespace ProjectC.objects
             get => _fallSpeed / TileHelper.TileSize;
             set => _fallSpeed = value;
         }
-        public float MaxYSpd = 8;
+        public float MaxYSpeed = 8;
+        public float JumpHeight = 0.6f;
 
         private float _fallSpeed = 0.2f;
-        private float _walkSpeed = 2;
+        private float _walkSpeed = 1.5f;
+        private bool _jumpedYet = false;
+        private bool _onground = false;
 
         public Dimension CurrentDimension = Dimension.Current;
         public Chunk ChunkIn = Dimension.VoidChunk;
         public Point ChunkPos = Point.Zero;
         public Vector2 Velocity = Vector2.Zero;
+        public int[,] Hotbar = new int[10, Chunk.TileDepth];
+        public int HotbarSlot;
 
         public Player()
         {
+            Dimension.LoadGameObject(this);
             position = new Vector2(512.5f * Chunk.ChunkWidth,1.5f * Chunk.ChunkHeight);
             LocalClient = this;
             origin = new Vector2(8,24);
+            for(var i = 0; i <= Hotbar.GetUpperBound(0); i++)
+            {
+                Hotbar[i, Chunk.ChunkTData] = i;
+                Hotbar[i, Chunk.ChunkTColor] = (int)Color.White.PackedValue;
+            }
         }
         
         private int _oldScroll;
@@ -80,6 +94,7 @@ namespace ProjectC.objects
                         break;
                     }
                 }
+                if (!_onground) ppos = position;
                 position = ppos;
                 CollideHorizontally();
                 return;
@@ -95,7 +110,7 @@ namespace ProjectC.objects
                 }
                 Velocity.Y = 0;
             }
-            else if (Collides(position + Vector2.UnitY * 2) && !Collides(position + Vector2.UnitY))
+            else if (Collides(position + Vector2.UnitY * 2) && !Collides(position + Vector2.UnitY) && !_jumpedYet)
             {
                 position += Vector2.UnitY;
             }
@@ -149,13 +164,23 @@ namespace ProjectC.objects
             var mouseState = Mouse.GetState();
             var a = keyState.IsKeyDown(Keys.A) ? 1 : 0;
             var d = keyState.IsKeyDown(Keys.D) ? 1 : 0;
-            var onGround = Collides(position + Vector2.UnitY);
-            if(onGround && position.Y != Math.Round(position.Y))
+            _onground = Collides(position + Vector2.UnitY);
+            if(_onground && position.Y != Math.Round(position.Y))
             {
                 position.Y -= (position.Y - (float)Math.Floor(position.Y));
             }
-            Velocity += new Vector2((d - a) * WalkSpeed, onGround ? 0 : FallSpeed);
-            Velocity.Y = Math.Clamp(Velocity.Y, -MaxYSpd, onGround ? 0 : MaxYSpd);
+            Velocity += new Vector2((d - a) * WalkSpeed, _onground ? 0 : FallSpeed);
+            if(_onground)
+            {
+                _jumpedYet = false;
+            }
+            if(keyState.IsKeyDown(Keys.Space) && _onground && !_jumpedYet)
+            {
+                _onground = false;
+                Velocity.Y = -JumpHeight;
+                _jumpedYet = true;
+            }
+            Velocity.Y = Math.Clamp(Velocity.Y, -MaxYSpeed, _onground ? 0 : MaxYSpeed);
             Velocity.X = Lerp(Math.Clamp(Velocity.X, -WalkSpeed * 2, WalkSpeed * 2), 0, 0.25f);
 
             Collide();
@@ -184,29 +209,38 @@ namespace ProjectC.objects
             }
 
             Camera.Position = position * TileHelper.TileSize;
-            var (x, y) = new Point((int)position.X /  Chunk.ChunkWidth, (int)position.Y / Chunk.ChunkHeight);
             var click = mouseState.LeftButton == ButtonState.Pressed;
+
+            for (var i = 0; i < 10; i++)
+            {
+                var input = keyState.IsKeyDown(Keys.D0 + i);
+                if (input)
+                {
+                    HotbarSlot = i;
+                }
+            }
+
+            if(mouseState.RightButton == ButtonState.Pressed)
+            {
+               
+                new Coin(GetPlacingPosition(mouseState.Position.ToVector2()), new Random().Next(0,2));
+            }
+
             if (click)
             {
-                TryPlaceTile(mouseState.Position.ToVector2(), EnumTiles.Grass);
-            }
-            var rightclick = mouseState.RightButton == ButtonState.Pressed;
-            if(rightclick)
-            {
-                TryPlaceTile(mouseState.Position.ToVector2(), EnumTiles.Air);
+                TryPlaceTile(mouseState.Position.ToVector2(), Hotbar[HotbarSlot, Chunk.ChunkTData], Hotbar[HotbarSlot, Chunk.ChunkTSide], Hotbar[HotbarSlot, Chunk.ChunkTColor], Hotbar[HotbarSlot, Chunk.ChunkTMeta]);
             }
             var save = keyState.IsKeyDown(Keys.K);
             if (save)
             {
                 CurrentDimension.Save();
             }
-
             Camera.zoom = Math.Clamp(Camera.zoom, 0.8f, 4f);
         }
 
-        public bool TryPlaceTile(Vector2 worldPos, EnumTiles type)
+        public Vector2 GetPlacingPosition(Vector2 worldPos)
         {
-            var playerpos = position * TileHelper.TileSize;
+            var playerpos = WorldPosition;
             var clampedpos = Vector2.Transform(worldPos, Matrix.Invert(Camera.CameraMatrix));
             clampedpos -= playerpos;
             var len = Math.Clamp(clampedpos.Length(), 8, 96);
@@ -215,12 +249,18 @@ namespace ProjectC.objects
             var npos = playerpos + clampedpos;
             npos /= TileHelper.TileSize;
             npos = Vector2.Round(npos);
+            return npos;
+        }
+
+        public bool TryPlaceTile(Vector2 worldPos, int type, int side, int color, int meta)
+        {
+            var npos = GetPlacingPosition(worldPos);
             var placed = false;
             if (npos.X >= 0 && npos.Y >= 0)
             {
                 var chunk = CurrentDimension.ChunkAtWorldPos(npos, true);
                 var chunkpos = chunk.WorldToChunk(npos);
-                placed = TileHelper.TryMakeTile((int)type, 0, Color.White, 0, chunk, chunkpos);
+                placed = TileHelper.TryMakeTile(type, side, color, meta, chunk, chunkpos);
             }
             return placed;
         }
