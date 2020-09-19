@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -34,16 +35,8 @@ namespace ProjectC
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Sprites.Square = this.Content.Load<Texture2D>("square");
-            Sprites.TileDirtGrass = this.Content.Load<Texture2D>("dirt_grassy");
-            Sprites.TileDirt = this.Content.Load<Texture2D>("dirt");
-            Sprites.TileStone = this.Content.Load<Texture2D>("stone");
-            Sprites.TileFresh = this.Content.Load<Texture2D>("fresh_tile");
-            Sprites.PlayerHuman = this.Content.Load<Texture2D>("player_hmn");
-            Sprites.SkyBg = this.Content.Load<Texture2D>("sky_bg");
-            Sprites.CloudBg = this.Content.Load<Texture2D>("clouds");
-            Sprites.Sun = this.Content.Load<Texture2D>("sun");
+            
+            Sprites.ImportAll(this);
 
             var font = File.ReadAllBytes(this.Content.RootDirectory + "/font.ttf");
             var res = TtfFontBaker.Bake(font,32,512,512,new CharacterRange[] {new CharacterRange(' ','~') });
@@ -54,6 +47,7 @@ namespace ProjectC
         protected override void Initialize()
         {
             WorldGenerator.instance.GenerateWorld();
+            Player.LocalClient = new Player();
             base.Initialize();
         }
 
@@ -64,6 +58,9 @@ namespace ProjectC
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            Dimension.DestroyThings();
+            Dimension.LoadThings();
 
             // step logic
             foreach (var obj in Dimension.Current.GameObjects)
@@ -96,10 +93,9 @@ namespace ProjectC
             }
             foreach (var obj in Dimension.Current.GameObjects)
             {
-                Camera.draw(_spriteBatch, obj);
+                obj.draw(_spriteBatch);
             }
 
-            _spriteBatch.DrawString(Sprites.Font, Player.LocalClient.ChunkIn.ChunkspacePosition.ToString(), Player.LocalClient.position + new Vector2(0,48), Color.White);
             DrawCount = 0;
             _spriteBatch.End();
 

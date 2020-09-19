@@ -56,11 +56,24 @@ namespace ProjectC.world
             var tileRight = Dimension.Current.TileAtWorldPos(wpos + Vector2.UnitX, Chunk.ChunkTData, false);
             var tileUp = Dimension.Current.TileAtWorldPos(wpos - Vector2.UnitY, Chunk.ChunkTData, false);
             var tileDown = Dimension.Current.TileAtWorldPos(wpos + Vector2.UnitY, Chunk.ChunkTData, false);
+            var tile = Dimension.Current.TileAtWorldPos(wpos, Chunk.ChunkTData, false);
 
-            var left = tileLeft > 0;
-            var right = tileRight > 0;
-            var up = tileUp > 0;
-            var down = tileDown > 0;
+            bool left, right, up, down;
+
+            if (tile == (int)EnumTiles.CopperPipe)
+            {
+                left = tileLeft == tile;
+                right = tileRight == tile;
+                up = tileUp == tile;
+                down = tileDown == tile;
+            }
+            else
+            {
+                left = tileLeft > 0;
+                right = tileRight > 0;
+                up = tileUp > 0;
+                down = tileDown > 0;
+            }
 
             var auto = EnumDrawSides.None;
 
@@ -83,7 +96,7 @@ namespace ProjectC.world
             if (!left && right && up && !down) auto = EnumDrawSides.BottomLeft;
             if (left && !right && up && !down) auto = EnumDrawSides.BottomRight;
 
-            if(up && Dimension.Current.TileAtWorldPos(wpos,Chunk.ChunkTData,false) == (int)EnumTiles.Grass)
+            if(up && tile == (int)EnumTiles.Grass)
             {
                 var c = Dimension.Current.ChunkAtWorldPos(wpos, false);
                 var cpos = c.WorldToChunk(wpos);
@@ -151,6 +164,21 @@ namespace ProjectC.world
                 case (int)EnumTiles.Air:
                 case (int)EnumTiles.Fresh: 
                     return Sprites.TileFresh;
+
+                case (int)EnumTiles.CopperOre:
+                    return Sprites.CopperOre;
+
+                case (int)EnumTiles.CobbledBricks:
+                    return Sprites.TileCobbledBricks;
+
+                case (int)EnumTiles.CopperPipe:
+                    return Sprites.TileCopperPipe;
+
+                case (int)EnumTiles.FancyWall:
+                    return Sprites.TileFancyWall;
+
+                case (int)EnumTiles.WallCave:
+                    return Sprites.WallCave;
             };
         }
 
@@ -164,7 +192,7 @@ namespace ProjectC.world
             throw new NotImplementedException();
         }
 
-        public static bool TryMakeTile(int type, int side, Color color, int meta, Chunk chunk, Point chunkpos)
+        public static bool TryMakeTile(int type, int side, int color, int meta, Chunk chunk, Point chunkpos)
         {
             if (type <= 0)
             {
@@ -175,7 +203,7 @@ namespace ProjectC.world
             
             if (chunk.TileFrom(chunkpos, Chunk.ChunkTData) <= 0)
             {
-                chunk.PlaceTile(type, side, (int)color.PackedValue, meta, chunkpos);
+                chunk.PlaceTile(type, side, color, meta, chunkpos);
                 UpdateTile(chunk, chunkpos, true);
                 return true;
             }

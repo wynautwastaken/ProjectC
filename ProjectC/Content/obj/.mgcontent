@@ -4,19 +4,42 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bg_cobble.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bg_underground.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/bordered_wall.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/brick.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/cave_bg.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/chunk.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/clouds.png</File>
-    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt.png</File>
-    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_grassy.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/clouds_bg.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/coin_gold.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/coin_small.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/copper_ore.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/copper_pipe.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/copper_plated_brick.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/dirt_jungle.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fancy_wall.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/flower.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/flower_blue.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/forest_bg.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/fresh_tile.png</File>
-    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_closemountains.png</File>
-    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_forest.png</File>
-    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_mountains.png</File>
-    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg_trees.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/grass_jungle.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/ladder.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plains_bg.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/plant.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/player_hmn.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/pot_huge.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/pot_medium.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/pot_tiny.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/roped_logs.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sign.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/skull.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sky_bg.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/spikes.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/stone.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/sun.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/tank.png</File>
+    <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/temple_bricks.png</File>
     <File>C:/Users/Cal/Documents/GitHub/ProjectC/ProjectC/Content/Untitled - 1.png</File>
   </SourceFiles>
   <DestFiles>
@@ -33,6 +56,29 @@
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
-    <File>square</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

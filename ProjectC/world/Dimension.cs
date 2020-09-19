@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Json;
 using Microsoft.Xna.Framework;
 using ProjectC.objects;
@@ -11,6 +12,8 @@ namespace ProjectC.world
     {
         public WorldType DimensionWorldType = WorldType.Overworld;
         public static Dimension Current = new Dimension();
+        public static Stack<GameObject> ToDestroy = new Stack<GameObject>();
+        public static Stack<GameObject> ToLoad = new Stack<GameObject>();
         private readonly List<Chunk> _chunks = new List<Chunk>();
         private readonly List<GameObject> _gameobjects = new List<GameObject>();
         private Dictionary<Point,Chunk> ChunkDict = new Dictionary<Point, Chunk>();
@@ -87,15 +90,32 @@ namespace ProjectC.world
         {
             Current._chunks.Remove(chunk);
         }
-        
+
         public static void UnloadGameObject(GameObject obj)
         {
-            Current._gameobjects.Remove(obj);
+            ToDestroy.Push(obj);
         }
 
         public static void LoadGameObject(GameObject obj)
         {
-            Current._gameobjects.Add(obj);
+            ToLoad.Push(obj);
         }
+
+        public static void DestroyThings()
+        {
+            while (0 < ToDestroy.Count)
+            {
+                Current._gameobjects.Remove(ToDestroy.Pop());
+            }
+        }
+
+        public static void LoadThings()
+        {
+            while (0 < ToLoad.Count)
+            {
+                Current._gameobjects.Add(ToLoad.Pop());
+            }
+        }
+
     }
 }

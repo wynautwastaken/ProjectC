@@ -6,6 +6,11 @@
         Fresh,
         Grass,
         Dirt,
-        Stone
+        Stone,
+        CopperOre,
+        CopperPipe,
+        FancyWall,
+        CobbledBricks,
+        WallCave
     }
 }

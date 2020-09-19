@@ -37,7 +37,7 @@ namespace ProjectC.world
                     var worm = chunk.Position + pos.ToVector2();
                     if (!WormHasBeen(worm.X, worm.Y))
                     {
-                        TileHelper.TryMakeTile((int)TileTypeFromWorldNoise(n, worm.X, worm.Y), 0, Color.White, 0, chunk, pos);
+                        TileHelper.TryMakeTile((int)TileTypeFromWorldNoise(n, worm.X, worm.Y), 0, (int)Color.White.PackedValue, 0, chunk, pos);
                     }
                 }
             }
@@ -56,7 +56,7 @@ namespace ProjectC.world
             float add = NoiseGenerator.GenFloatNoise(seedI + seedJ, 4);
             float ratio = Chunk.ChunkWidth / Chunk.ChunkHeight;
             n1 = NoiseHelper.GustavsonNoise(seedI / Chunk.ChunkWidth + add * ratio, seedJ / Chunk.ChunkHeight + add, false, true);
-            n = Player.Lerp(n + n1, 0, (Chunk.ChunkHeight * 2) / (seedJ + 1));
+            n = Player.Lerp(n + n1*1.5f, 0, (Chunk.ChunkHeight * 3) / (seedJ + 1));
             return n >= 1.15f;
         }
     }
